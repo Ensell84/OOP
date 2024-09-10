@@ -2,12 +2,15 @@ package ru.nsu.bondar;
 
 import java.util.Random;
 
+/**
+ * Class used to measure time of heapSort() function.
+ */
 public class TimeMeasurment {
     /**
      * Function for measuring working time of heapSort function.
      */
     public static void measure() {
-        for (int i = 1; i < 1000000000; i+=10000000) {
+        for (int i = 1; i < 1000000000; i += 10000000) {
             int[] array = generateArray(i);
             int[] originalArray = array.clone();
 
@@ -19,7 +22,7 @@ public class TimeMeasurment {
                 long endTime = System.nanoTime();
                 time += endTime - startTime;
             }
-            System.out.println(i + "---" + time/3);
+            System.out.println(i + "---" + time / 3);
         }
     }
 

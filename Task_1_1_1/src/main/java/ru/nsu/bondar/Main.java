@@ -2,6 +2,9 @@ package ru.nsu.bondar;
 
 import static ru.nsu.bondar.HeapSort.heapSort;
 
+/**
+ * Main Class that contains program entry point.
+ */
 public class Main {
     /**
      * Program entry point.
@@ -13,11 +16,11 @@ public class Main {
         heapSort(array);
         printArray(array);
 
-//        TimeMeasurment.measure();
+//      TimeMeasurment.measure();
     }
 
     /**
-     * Prints array to console
+     * Prints array to console.
      *
      * @param array to print in a1 a3 ... an format
      */

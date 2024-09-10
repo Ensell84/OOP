@@ -1,11 +1,11 @@
 package ru.nsu.bondar;
 
 /**
- * HeapSort class that implements heapsort sorting algorithm
+ * HeapSort class that implements heapsort sorting algorithm.
  */
 public class HeapSort {
     /**
-     * Sorting function (heapsort algorithm)
+     * Sorting function (heapsort algorithm).
      *
      * @param array to sort
      */
@@ -13,8 +13,9 @@ public class HeapSort {
         int n = array.length;
 
         // Creating heap
-        for (int i = n / 2 - 1; i >= 0; i--)
+        for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(array, n, i);
+        }
 
         // Picking elements from heap one by one
         for (int i = n - 1; i > 0; i--) {
@@ -29,7 +30,7 @@ public class HeapSort {
     }
 
     /**
-     * heapify function to maintain the heap property
+     * heapify function to maintain the heap property.
      *
      * @param array The array representing the heap.
      * @param n The size of the heap.
@@ -41,12 +42,14 @@ public class HeapSort {
         int right = 2 * i + 2;
 
         // If left child > root
-        if (left < n && array[left] > array[largest])
+        if (left < n && array[left] > array[largest]) {
             largest = left;
+        }
 
         // If right child > largest element at the moment
-        if (right < n && array[right] > array[largest])
+        if (right < n && array[right] > array[largest]) {
             largest = right;
+        }
 
         // If largest is not root
         if (largest != i) {

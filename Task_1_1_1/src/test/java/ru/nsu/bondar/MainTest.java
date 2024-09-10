@@ -1,10 +1,10 @@
 package ru.nsu.bondar;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.Random;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class MainTest {
 
@@ -44,9 +44,10 @@ class MainTest {
         int n = array.length;
 
         // start from the last non-leaf node
-        for (int i = n / 2 - 1; i > 0 ; i--) {
+        for (int i = n / 2 - 1; i > 0; i--) {
             HeapSort.heapify(array, n, i);
-            Assertions.assertTrue(isMaxHeap(array, n, i), "The subtree rooted at index " + i + " not satisfy the max-heap property.");
+            Assertions.assertTrue(isMaxHeap(array, n, i),
+                    "Subtree at index " + i + " does not satisfy the max-heap property");
         }
     }
 
