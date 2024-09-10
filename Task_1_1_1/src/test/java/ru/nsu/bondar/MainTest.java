@@ -82,4 +82,10 @@ class MainTest {
         return isMaxHeap(array, n, left) && isMaxHeap(array, n, right);
     }
 
+    @Test
+    void testMain() {
+        Main.array = new int[]{12, 11, 13, 5, 6, 7};
+        Main.main(new String[]{});
+        Assertions.assertArrayEquals(new int[]{5, 6, 7, 11, 12, 13}, Main.array);
+    }
 }
