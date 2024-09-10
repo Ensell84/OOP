@@ -12,6 +12,8 @@ public class Main {
         int[] array = {12, 11, 13, 5, 6, 7};
         heapSort(array);
         printArray(array);
+
+//        TimeMeasurment.measure();
     }
 
     /**
