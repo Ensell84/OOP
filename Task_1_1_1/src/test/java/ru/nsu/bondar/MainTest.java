@@ -1,5 +1,7 @@
 package ru.nsu.bondar;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Random;
 import org.junit.jupiter.api.Assertions;
@@ -83,8 +85,12 @@ class MainTest {
 
     @Test
     void testMain() {
-        Main.array = new int[]{12, 11, 13, 5, 6, 7};
+        String input = "5\n4\n3\n2\n1\n0\n";
+
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
         Main.main(new String[]{});
-        Assertions.assertArrayEquals(new int[]{5, 6, 7, 11, 12, 13}, Main.array);
+        Assertions.assertArrayEquals(new int[]{0, 1, 2, 3, 4}, Main.array);
     }
 }
