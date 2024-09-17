@@ -1,6 +1,7 @@
 package ru.nsu.bondar;
 
 import static ru.nsu.bondar.HeapSort.heapSort;
+
 import java.util.Scanner;
 
 /**
