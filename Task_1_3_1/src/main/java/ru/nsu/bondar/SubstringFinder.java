@@ -1,9 +1,34 @@
 package ru.nsu.bondar;
 
+import java.util.List;
+
 /**
- * Class for finding substrings in large text files using Z-function.
+ * Класс для нахождения всех вхождений подстроки в файл.
+ * Используется алгоритм на основе Z-Функции.
  */
 public class SubstringFinder {
+
+    /**
+     * Обрабатывает буфер текста используя Z-Функцию для нахождения вхождений паттерна.
+     *
+     * @param text строка для обработки
+     * @param pattern паттерн, используемый для поиска вхождений
+     * @param offset текущая позиция в файле
+     * @param occurrences список, в который сохраняются найденные вхождения
+     */
+    private static void processBuffer(String text, String pattern, int offset,
+                                      List<Integer> occurrences) {
+        String concatenated = pattern + "$" + text;
+        int[] z = calculateZFunction(concatenated);
+        int pattern_length = pattern.length();
+
+        for (int i = 0; i < z.length; i++) {
+            if (z[i] == pattern_length) {
+                int position = i - pattern_length - 1;
+                occurrences.add(position + offset);
+            }
+        }
+    }
 
     /**
      * Вычисляет Z-Функцию для строки.
