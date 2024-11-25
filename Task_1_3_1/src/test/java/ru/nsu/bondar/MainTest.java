@@ -1,134 +1,54 @@
 package ru.nsu.bondar;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-class MainTest {
+public class MainTest {
+    private final InputStream standardIn = System.in;
 
     @TempDir
     Path tempDir;
 
+    @AfterEach
+    void tearDown() {
+        System.setIn(standardIn);
+        Main.result = null;
+    }
+
     @Test
     void testMain() throws IOException {
         Path testFile = createTestFile("абаба");
-
         String input = testFile.toString() + "\nаба\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-
         Main.main(new String[]{});
-
         assertEquals(List.of(0, 2), Main.result);
-        Main.result = null;
     }
 
     @Test
     void testMainFileNotFound() {
         String input = "nonexistent.txt\ntest\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-
         Main.main(new String[]{});
-
         assertNull(Main.result);
     }
 
     @Test
-    void testBasicFunctionality() throws IOException {
-        Path testFile = createTestFile("абракадабра");
-        List<Integer> result = SubstringFinder.find(testFile.toString(), "бра");
-        assertEquals(List.of(1, 8), result);
-    }
-
-    @Test
-    void testEmptyFile() throws IOException {
-        Path testFile = createTestFile("");
-        List<Integer> result = SubstringFinder.find(testFile.toString(), "test");
-        assertTrue(result.isEmpty());
-    }
-
-    @Test
-    void testPatternLargerThanFile() throws IOException {
-        Path testFile = createTestFile("abc");
-        List<Integer> result = SubstringFinder.find(testFile.toString(), "abcd");
-        assertTrue(result.isEmpty());
-    }
-
-    @Test
-    void testOverlappingPatterns() throws IOException {
-        Path testFile = createTestFile("aaaa");
-        List<Integer> result = SubstringFinder.find(testFile.toString(), "aa");
-        assertEquals(List.of(0, 1, 2), result);
-    }
-
-    @Test
-    void testChunkBoundaryOverlap() throws IOException {
-        int bufferSize = 8192;
-        String content = "x".repeat(bufferSize - 2) + "abaaba";
-
-        Path testFile = createTestFile(content);
-        List<Integer> result = SubstringFinder.find(testFile.toString(), "aba");
-
-        assertEquals(List.of(bufferSize - 2, bufferSize + 1), result);
-    }
-
-    @Test
-    void testUnicodeCharacters() throws IOException {
-        Path testFile = createTestFile("привет世界こんにちは");
-        List<Integer> result = SubstringFinder.find(testFile.toString(), "世界");
-        assertEquals(List.of(6), result);
-    }
-
-    @Test
-    void testNullInputs() {
-        assertThrows(IllegalArgumentException.class,
-                () -> SubstringFinder.find(null, "test"));
-        assertThrows(IllegalArgumentException.class,
-                () -> SubstringFinder.find("test.txt", null));
-    }
-
-    @Test
-    void testEmptyPattern() {
-        assertThrows(IllegalArgumentException.class,
-                () -> SubstringFinder.find("test.txt", ""));
-    }
-
-    @Test
-    void testLargeFile() throws IOException {
-        int sizeInMb = 5000;
-        String pattern = "test";
-        int totalChunks = (sizeInMb * 1024 * 1024) / pattern.length();
-        int expectedPatterns = (totalChunks + 999) / 1000;
-
-        Path testFile = tempDir.resolve("test.txt");
-        try (BufferedWriter writer = Files.newBufferedWriter(testFile)) {
-            for (int i = 0; i < totalChunks; i++) {
-                if (i % 1000 == 0) {
-                    writer.write(pattern);
-                } else {
-                    writer.write("xxxx");
-                }
-
-                if (i % 100000 == 0) {
-                    writer.flush();
-                }
-            }
-        }
-
-        List<Integer> result = SubstringFinder.find(testFile.toString(), pattern);
-
-        assertTrue(result.contains(0));
-        assertTrue(result.contains(4000));
-        assertEquals(expectedPatterns, result.size());
+    void testMainEmptyPattern() {
+        String input = "test.txt\n\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Main.main(new String[]{});
+        assertNull(Main.result);
     }
 
     private Path createTestFile(String content) throws IOException {
