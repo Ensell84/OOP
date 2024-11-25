@@ -15,7 +15,7 @@ public class SubstringFinder {
     private static final int BUFFER_SIZE = 8192;
 
     /**
-     * Находит все вхождения паттерн-строки в файл
+     * Находит все вхождения паттерн-строки в файл.
      *
      * @param filename путь к input файлу
      * @param pattern строка-паттерн для поиска
@@ -64,12 +64,12 @@ public class SubstringFinder {
     private static void processBuffer(String text, String pattern, int offset,
                                       List<Integer> occurrences) {
         String concatenated = pattern + "$" + text;
-        int[] z = calculateZFunction(concatenated);
-        int pattern_length = pattern.length();
+        int[] z = calculatezFunction(concatenated);
+        int patternLength = pattern.length();
 
         for (int i = 0; i < z.length; i++) {
-            if (z[i] == pattern_length) {
-                int position = i - pattern_length - 1;
+            if (z[i] == patternLength) {
+                int position = i - patternLength - 1;
                 occurrences.add(position + offset);
             }
         }
@@ -81,7 +81,7 @@ public class SubstringFinder {
      * @param text input строка
      * @return массив значений Z-Функций
      */
-    private static int[] calculateZFunction(String text) {
+    private static int[] calculatezFunction(String text) {
         int n = text.length();
         int[] z = new int[n];
         int left = 0;

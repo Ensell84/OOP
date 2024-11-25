@@ -1,16 +1,18 @@
 package ru.nsu.bondar;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
-class SubstringFinderTest {
+class MainTest {
 
     @TempDir
     Path tempDir;
@@ -58,12 +60,12 @@ class SubstringFinderTest {
     @Test
     void testChunkBoundaryOverlap() throws IOException {
         int bufferSize = 8192;
-        String content = "x".repeat(bufferSize-2) + "abaaba";
+        String content = "x".repeat(bufferSize - 2) + "abaaba";
 
         Path testFile = createTestFile(content);
         List<Integer> result = SubstringFinder.find(testFile.toString(), "aba");
 
-        assertEquals(List.of(bufferSize-2, bufferSize+1), result);
+        assertEquals(List.of(bufferSize - 2, bufferSize + 1), result);
     }
 
     @Test

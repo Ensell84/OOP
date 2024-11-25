@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Main-Класс, содержащий entry point
+ * Main-Класс, содержащий entry point.
  */
 public class Main {
     static List<Integer> result;
 
     /**
-     * Entry point программы
+     * Entry point программы.
      *
      * @param args аргументы программы
      */
