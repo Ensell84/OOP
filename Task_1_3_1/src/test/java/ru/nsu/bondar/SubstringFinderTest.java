@@ -1,16 +1,20 @@
 package ru.nsu.bondar;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Класс, тестирующий SubstringFinder класс.
+ */
 public class SubstringFinderTest {
 
     @TempDir
@@ -81,7 +85,6 @@ public class SubstringFinderTest {
         int sizeInMb = 5000;
         String pattern = "test";
         int totalChunks = (sizeInMb * 1024 * 1024) / pattern.length();
-        int expectedPatterns = (totalChunks + 999) / 1000;
 
         Path testFile = tempDir.resolve("test.txt");
         try (BufferedWriter writer = Files.newBufferedWriter(testFile)) {
@@ -102,7 +105,7 @@ public class SubstringFinderTest {
 
         assertTrue(result.contains(0));
         assertTrue(result.contains(4000));
-        assertEquals(expectedPatterns, result.size());
+        assertEquals((totalChunks + 999) / 1000, result.size());
     }
 
     private Path createTestFile(String content) throws IOException {

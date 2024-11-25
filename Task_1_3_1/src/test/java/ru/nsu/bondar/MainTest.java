@@ -9,11 +9,13 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+/**
+ * Класс, тестирующий Main класс.
+ */
 public class MainTest {
     private final InputStream standardIn = System.in;
 
