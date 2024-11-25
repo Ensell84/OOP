@@ -1,12 +1,57 @@
 package ru.nsu.bondar;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс для нахождения всех вхождений подстроки в файл.
+ * Utility-Класс для нахождения всех вхождений подстроки в файл.
  * Используется алгоритм на основе Z-Функции.
  */
 public class SubstringFinder {
+
+    private static final int BUFFER_SIZE = 8192;
+
+    /**
+     * Находит все вхождения паттерн-строки в файл
+     *
+     * @param filename путь к input файлу
+     * @param pattern строка-паттерн для поиска
+     * @return Список индексов всех вхождений паттерна
+     * @throws IOException в случае I/O ошибки
+     */
+    public static List<Integer> find(String filename, String pattern) throws IOException {
+        if (filename == null || pattern == null) {
+            throw new IllegalArgumentException("Filename and pattern must not be null");
+        }
+        if (pattern.isEmpty()) {
+            throw new IllegalArgumentException("Pattern must not be empty");
+        }
+        if (pattern.length() > BUFFER_SIZE) {
+            throw new IllegalArgumentException("Pattern is too long");
+        }
+
+        List<Integer> occurrences = new ArrayList<>();
+
+        try (FileReader fr = new FileReader(filename, StandardCharsets.UTF_8)) {
+            char[] buffer = new char[BUFFER_SIZE];
+            String overlap = "";
+            int offset = 0;
+
+            int charsRead;
+            while ((charsRead = fr.read(buffer)) != -1) {
+                String chunk = overlap + new String(buffer, 0, charsRead);
+                processBuffer(chunk, pattern, offset, occurrences);
+
+                overlap = chunk.substring(chunk.length() - pattern.length() + 1);
+                offset += chunk.length() - overlap.length();
+            }
+        }
+
+        return occurrences;
+    }
 
     /**
      * Обрабатывает буфер текста используя Z-Функцию для нахождения вхождений паттерна.
