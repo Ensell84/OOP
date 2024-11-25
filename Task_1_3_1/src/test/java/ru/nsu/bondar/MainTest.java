@@ -3,7 +3,9 @@ package ru.nsu.bondar;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,6 +29,17 @@ class MainTest {
         Main.main(new String[]{});
 
         assertEquals(List.of(0, 2), Main.result);
+        Main.result = null;
+    }
+
+    @Test
+    void testMainFileNotFound() {
+        String input = "nonexistent.txt\ntest\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        Main.main(new String[]{});
+
+        assertNull(Main.result);
     }
 
     @Test
@@ -87,6 +100,35 @@ class MainTest {
     void testEmptyPattern() {
         assertThrows(IllegalArgumentException.class,
                 () -> SubstringFinder.find("test.txt", ""));
+    }
+
+    @Test
+    void testLargeFile() throws IOException {
+        int sizeInMb = 5000;
+        String pattern = "test";
+        int totalChunks = (sizeInMb * 1024 * 1024) / pattern.length();
+        int expectedPatterns = (totalChunks + 999) / 1000;
+
+        Path testFile = tempDir.resolve("test.txt");
+        try (BufferedWriter writer = Files.newBufferedWriter(testFile)) {
+            for (int i = 0; i < totalChunks; i++) {
+                if (i % 1000 == 0) {
+                    writer.write(pattern);
+                } else {
+                    writer.write("xxxx");
+                }
+
+                if (i % 100000 == 0) {
+                    writer.flush();
+                }
+            }
+        }
+
+        List<Integer> result = SubstringFinder.find(testFile.toString(), pattern);
+
+        assertTrue(result.contains(0));
+        assertTrue(result.contains(4000));
+        assertEquals(expectedPatterns, result.size());
     }
 
     private Path createTestFile(String content) throws IOException {
