@@ -1,0 +1,52 @@
+studentGroup,FIT-23213
+studentName,Ivan Ivanov
+isPaid,true
+currentSemester,3
+semester,name,type,grade
+1,Calculus I,EXAM,4
+1,Linear Algebra,EXAM,5
+1,Introduction to Programming,EXAM,5
+1,Discrete Mathematics,EXAM,4
+1,English,DIFFERENTIATED_CREDIT,5
+1,History,CREDIT,1
+2,Calculus II,EXAM,4
+2,Physics,EXAM,3
+2,Object-Oriented Programming,EXAM,5
+2,Digital Logic Design,EXAM,4
+2,Academic Writing,DIFFERENTIATED_CREDIT,4
+2,Physical Education,CREDIT,1
+2,Probability Theory,CREDIT,1
+3,Probability Theory,EXAM,null
+3,Data Structures and Algorithms,EXAM,null
+3,Computer Architecture,EXAM,null
+3,Operating Systems,EXAM,null
+3,Software Engineering Basics,DIFFERENTIATED_CREDIT,null
+3,Philosophy,CREDIT,null
+4,Database Systems,EXAM,null
+4,Computer Networks,EXAM,null
+4,Theory of Computation,EXAM,null
+4,Web Development,DIFFERENTIATED_CREDIT,null
+4,Team Project Practice,CREDIT,null
+4,Economics,CREDIT,null
+5,Machine Learning Basics,EXAM,null
+5,Information Security,EXAM,null
+5,Software Testing,EXAM,null
+5,System Analysis,DIFFERENTIATED_CREDIT,null
+5,Professional Ethics,CREDIT,null
+5,Technical Writing,CREDIT,null
+6,Artificial Intelligence,EXAM,null
+6,Distributed Systems,EXAM,null
+6,Mobile Development,DIFFERENTIATED_CREDIT,null
+6,Cloud Computing,DIFFERENTIATED_CREDIT,null
+6,Industry Practice,CREDIT,null
+6,Research Methods,CREDIT,null
+7,Big Data Processing,EXAM,null
+7,Computer Graphics,EXAM,null
+7,Software Project Management,DIFFERENTIATED_CREDIT,null
+7,Specialty Elective I,EXAM,null
+7,Industry Internship,CREDIT,null
+7,Research Seminar,CREDIT,null
+8,Specialty Elective II,EXAM,null
+8,Specialty Elective III,EXAM,null
+8,Pre-diploma Practice,CREDIT,null
+8,Qualification Work,QUALIFICATION_WORK,null
