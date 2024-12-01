@@ -3,6 +3,8 @@ package ru.nsu.bondar;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.nsu.bondar.Subject.SubjectType;
+
 /**
  * Represents academic semester.
  * Contains list of subjects and semester completion status.
@@ -24,6 +26,7 @@ public class Semester {
     /**
      * Creates new semester with semester number.
      * Initial status = NOT_STARTED.
+     * 
      * @param number semester number
      */
     public Semester(int number) {
@@ -32,11 +35,36 @@ public class Semester {
         this.subjects = new ArrayList<>();
     }
 
-    public int getNumber() { return number; }
+    /**
+     * Retrieves all subjects with matching type from semester.
+     * 
+     * @param type of Subjects
+     * @return List of Subjects with matching type
+     */
+    public List<Subject> getSubjectsByType(SubjectType type) {
+        return subjects.stream()
+                .filter(subject -> subject.getType() == type)
+                .toList();
+    }
 
-    public Status getStatus() { return status; }
-    public void setStatus(Status status) { this.status = status; }
+    public int getNumber() {
+        return number;
+    }
 
-    public List<Subject> getSubjects() { return subjects; }
-    public void addSubject(Subject subject) { subjects.add(subject); }
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void addSubject(Subject subject) {
+        subjects.add(subject);
+    }
+
 }

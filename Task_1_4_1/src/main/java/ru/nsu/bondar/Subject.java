@@ -11,7 +11,7 @@ public class Subject {
      */
     public enum SubjectType {
         EXAM(true),
-        DIFFERENTIATED_CREDIT(true),
+        DIFF_CREDIT(true),
         CREDIT(true),
         QUALIFICATION_WORK(true),
         COLLOQUIUM(false),
@@ -32,6 +32,7 @@ public class Subject {
     /**
      * Creates new subject with name and type.
      * Initially has no grade and not marked as final.
+     * 
      * @param name subject name
      * @param type type of subject exam
      */
@@ -42,12 +43,27 @@ public class Subject {
         this.isFinal = false;
     }
 
-    public String getName() { return name; }
-    public SubjectType getType() { return type; }
+    public String getName() {
+        return name;
+    }
 
-    public Integer getGrade() { return grade; }
-    public void setGrade(Integer grade) { this.grade = grade; }
+    public SubjectType getType() {
+        return type;
+    }
 
-    public boolean isFinal() { return isFinal; }
-    public void setFinal(boolean isFinal) { this.isFinal = isFinal; }
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public boolean isFinal() {
+        return isFinal;
+    }
+
+    public void setFinal(boolean isFinal) {
+        this.isFinal = isFinal;
+    }
 }
