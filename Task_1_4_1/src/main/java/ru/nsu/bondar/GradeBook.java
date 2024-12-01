@@ -4,11 +4,13 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.HashSet;
-import java.util.Collections;
 import java.util.stream.IntStream;
+
+import ru.nsu.bondar.Subject.SubjectType;
 
 /**
  * Represents an electronic grade book for a student.
@@ -25,14 +27,31 @@ public class GradeBook {
 
     /**
      * Loads grade book data from a CSV file.
-     * File should contain student info in first 4 lines and subjects data after header.
-     * @param csvPath path to CSV file in resources
+     * File should contain student info in first 4 lines and subjects data after
+     * header.
+     * 
+     * @param csvPath path to CSV file in resources folder
      * @throws RuntimeException if file is not found or parsing fails
      */
     public void loadFromCsv(String csvPath) {
+        if (csvPath == null) {
+            throw new RuntimeException("Path to CSV config file cannot be null");
+        }
         InputStream inputStream = this.getClass().getResourceAsStream("/" + csvPath);
+        loadFromCsvStream(inputStream);
+    }
+
+    /**
+     * Loads grade book data from an input stream from CSV file.
+     * File should contain student info in first 4 lines and subjects data after
+     * header.
+     * 
+     * @param inputStream InputStream from a CSV file
+     * @throws RuntimeException if file is not found or parsing fails
+     */
+    public void loadFromCsvStream(InputStream inputStream) {
         if (inputStream == null) {
-            throw new RuntimeException("Config file not found: " + csvPath);
+            throw new RuntimeException("InputStream cannot be null");
         }
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String[] studentGroupRow = reader.readLine().split(",");
@@ -44,8 +63,7 @@ public class GradeBook {
                     studentGroupRow[1].trim(),
                     studentNameRow[1].trim(),
                     Boolean.parseBoolean(isPaidRow[1].trim()),
-                    Integer.parseInt(currentSemesterRow[1].trim())
-            );
+                    Integer.parseInt(currentSemesterRow[1].trim()));
 
             List<String[]> subjectRows = reader.lines()
                     .skip(1)
@@ -85,8 +103,10 @@ public class GradeBook {
                 Subject subject = new Subject(name, type);
                 subject.setGrade(grade);
 
-                subject.setFinal(!seenSubjects.contains(name));
-                seenSubjects.add(name);
+                if (!seenSubjects.contains(name) && type == SubjectType.EXAM || type == SubjectType.DIFF_CREDIT) {
+                    subject.setFinal(true);
+                    seenSubjects.add(name);
+                }
 
                 semesters.get(semester - 1).addSubject(subject);
             });
@@ -96,7 +116,23 @@ public class GradeBook {
         }
     }
 
+    /**
+     * Retrieves final subjects across all semesters.
+     * 
+     * @return List of final subjects
+     */
+    public List<Subject> getFinalSubjects() {
+        return semesters.stream()
+                .flatMap(semester -> semester.getSubjects().stream())
+                .filter(Subject::isFinal)
+                .toList();
+    }
+
     public List<Semester> getSemesters() {
         return semesters;
+    }
+
+    public Student getStudent() {
+        return student;
     }
 }
