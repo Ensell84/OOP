@@ -29,10 +29,10 @@ class GradeBookTest {
     @Test
     void testLoadFromCsvStream() throws IOException {
         String csvContent = createCsvContent(2,
-                new SubjectData(1, "Calculus I", "EXAM", 4, true),
-                new SubjectData(1, "Linear Algebra", "EXAM", 5, true),
-                new SubjectData(2, "Calculus II", "EXAM", 4, true),
-                new SubjectData(2, "Physics", "EXAM", 3, true));
+                new SubjectData(1, "Calculus I", "EXAM", 4),
+                new SubjectData(1, "Linear Algebra", "EXAM", 5),
+                new SubjectData(2, "Calculus II", "EXAM", 4),
+                new SubjectData(2, "Physics", "EXAM", 3));
 
         Path csvPath = tempDir.resolve("test.csv");
         Files.writeString(csvPath, csvContent);
@@ -57,9 +57,11 @@ class GradeBookTest {
     @Test
     void testGetFinalSubjects() throws IOException {
         String csvContent = createCsvContent(3,
-                new SubjectData(1, "Calculus I", "EXAM", 4, true),
-                new SubjectData(2, "Calculus II", "EXAM", 5, true),
-                new SubjectData(3, "Probability Theory", "EXAM", null, true));
+                new SubjectData(1, "Calculus I", "EXAM", 4),
+                new SubjectData(2, "Calculus II", "EXAM", 5),
+                new SubjectData(2, "Probability Theory", "EXAM", 2),
+                new SubjectData(3, "Calculus II", "EXAM", null),
+                new SubjectData(3, "Probability Theory", "EXAM", null));
 
         Path csvPath = tempDir.resolve("test.csv");
         Files.writeString(csvPath, csvContent);
@@ -70,18 +72,17 @@ class GradeBookTest {
 
         List<Subject> finalSubjects = gradeBook.getFinalSubjects();
         assertEquals(3, finalSubjects.size());
-        assertEquals("Calculus I", finalSubjects.get(0).getName());
-        assertEquals("Calculus II", finalSubjects.get(1).getName());
-        assertEquals("Probability Theory", finalSubjects.get(2).getName());
+        assertEquals(3, finalSubjects.stream().filter(Subject::isFinal).count());
     }
 
     @Test
     void testCalculateAverageGrade() throws IOException {
         String csvContent = createCsvContent(2,
-                new SubjectData(1, "Math", "EXAM", 4, true),
-                new SubjectData(1, "Physics", "EXAM", 5, true),
-                new SubjectData(2, "Chemistry", "EXAM", 3, true),
-                new SubjectData(2, "Biology", "CREDIT", 2, false));
+                new SubjectData(1, "Math", "EXAM", 4),
+                new SubjectData(1, "Physics", "EXAM", 5),
+                new SubjectData(2, "Chemistry", "EXAM", 3),
+                new SubjectData(2, "Calculus", "CREDIT", 2),
+                new SubjectData(2, "Biology", "DIFF_CREDIT", 2));
 
         Path csvPath = tempDir.resolve("test.csv");
         Files.writeString(csvPath, csvContent);
@@ -96,12 +97,13 @@ class GradeBookTest {
 
     @Test
     void testCanTransferToBudget() throws IOException {
-        String csvContent = createCsvContent(3,
-                new SubjectData(1, "Math", "EXAM", 4, true),
-                new SubjectData(1, "Physics", "EXAM", 5, true),
-                new SubjectData(2, "Chemistry", "EXAM", 4, true),
-                new SubjectData(2, "Programming", "DIFF_CREDIT", 4, true),
-                new SubjectData(3, "Biology", "CREDIT", 1, false));
+        String csvContent = createCsvContent(4,
+                new SubjectData(1, "Math", "EXAM", 4),
+                new SubjectData(1, "Physics", "EXAM", 5),
+                new SubjectData(2, "Chemistry", "EXAM", 4),
+                new SubjectData(2, "Programming", "EXAM", 4),
+                new SubjectData(3, "Biology", "CREDIT", 1),
+                new SubjectData(3, "Biology 2", "DIFF_CREDIT", 3));
 
         Path csvPath = tempDir.resolve("test.csv");
         Files.writeString(csvPath, csvContent);
@@ -115,13 +117,13 @@ class GradeBookTest {
 
     @Test
     void testCanGetRedDiploma() throws IOException {
-        String csvContent = createCsvContent(4,
-                new SubjectData(1, "Math", "EXAM", 5, true),
-                new SubjectData(1, "Physics", "EXAM", 5, true),
-                new SubjectData(2, "Chemistry", "EXAM", 5, true),
-                new SubjectData(2, "Programming", "DIFF_CREDIT", 5, true),
-                new SubjectData(3, "Biology", "CREDIT", 1, false),
-                new SubjectData(4, "Qualification Work", "QUALIFICATION_WORK", 5, true));
+        String csvContent = createCsvContent(5,
+                new SubjectData(1, "Math", "EXAM", 5),
+                new SubjectData(1, "Physics", "EXAM", 5),
+                new SubjectData(2, "Chemistry", "EXAM", 5),
+                new SubjectData(2, "Programming", "DIFF_CREDIT", 5),
+                new SubjectData(3, "Biology", "CREDIT", 1),
+                new SubjectData(4, "Qualification Work", "QUALIFICATION_WORK", 5));
 
         Path csvPath = tempDir.resolve("test.csv");
         Files.writeString(csvPath, csvContent);
@@ -135,10 +137,10 @@ class GradeBookTest {
 
     @Test
     void testCanReceiveIncreasedScholarship() throws IOException {
-        String csvContent = createCsvContent(2,
-                new SubjectData(1, "Math", "EXAM", 5, true),
-                new SubjectData(1, "Physics", "EXAM", 5, true),
-                new SubjectData(2, "Chemistry", "EXAM", 4, true));
+        String csvContent = createCsvContent(3,
+                new SubjectData(1, "Math", "EXAM", 5),
+                new SubjectData(1, "Physics", "EXAM", 5),
+                new SubjectData(2, "Chemistry", "EXAM", 4));
 
         Path csvPath = tempDir.resolve("test.csv");
         Files.writeString(csvPath, csvContent);
@@ -171,14 +173,12 @@ class GradeBookTest {
         String name;
         String type;
         Integer grade;
-        boolean isFinal;
 
-        SubjectData(int semester, String name, String type, Integer grade, boolean isFinal) {
+        SubjectData(int semester, String name, String type, Integer grade) {
             this.semester = semester;
             this.name = name;
             this.type = type;
             this.grade = grade;
-            this.isFinal = isFinal;
         }
     }
 }

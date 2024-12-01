@@ -158,7 +158,7 @@ public class GradeBook {
      * @return true if possible, otherwise false
      */
     public boolean canTransferToBudget() {
-        List<Semester> lastTwoSem = semesters.subList(student.getCurrentSemester() - 2, student.getCurrentSemester());
+        List<Semester> lastTwoSem = semesters.subList(student.getCurrentSemester() - 3, student.getCurrentSemester() - 1);
 
         boolean examGrade = lastTwoSem.stream()
                 .flatMap(sem -> sem.getSubjectsByType(SubjectType.EXAM).stream())
@@ -175,11 +175,7 @@ public class GradeBook {
                 .filter(subj -> subj.getGrade() != null)
                 .anyMatch(subj -> subj.getGrade() == 0);
 
-        if (examGrade || diffCreditGrade || creditGrade) {
-            return false;
-        } else {
-            return true;
-        }
+        return !examGrade && !diffCreditGrade && !creditGrade;
     }
 
     /**
