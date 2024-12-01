@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -49,7 +48,8 @@ class GradeBookTest {
 
         List<Subject> subjectsInSem1 = gradeBook.getSemesters().get(0).getSubjects();
         assertEquals(2, subjectsInSem1.size());
-        assertTrue(subjectsInSem1.stream().anyMatch(subj -> Objects.equals(subj.getName(), "Calculus I")));
+        assertTrue(subjectsInSem1.stream().
+                anyMatch(subj -> Objects.equals(subj.getName(), "Calculus I")));
         assertTrue(subjectsInSem1.stream().noneMatch(subj -> subj.getGrade() == 3));
         assertTrue(subjectsInSem1.stream().allMatch(Subject::isFinal));
     }
@@ -81,7 +81,7 @@ class GradeBookTest {
                 new SubjectData(1, "Math", "EXAM", 4),
                 new SubjectData(1, "Physics", "EXAM", 5),
                 new SubjectData(2, "Chemistry", "EXAM", 3),
-                new SubjectData(2, "Calculus", "CREDIT", 2),
+                new SubjectData(2, "Calculus", "CREDIT", 1),
                 new SubjectData(2, "Biology", "DIFF_CREDIT", 2));
 
         Path csvPath = tempDir.resolve("test.csv");

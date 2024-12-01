@@ -2,7 +2,6 @@ package ru.nsu.bondar;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import ru.nsu.bondar.Subject.SubjectType;
 
 /**
@@ -26,7 +25,7 @@ public class Semester {
     /**
      * Creates new semester with semester number.
      * Initial status = NOT_STARTED.
-     * 
+     *
      * @param number semester number
      */
     public Semester(int number) {
@@ -37,7 +36,7 @@ public class Semester {
 
     /**
      * Retrieves all subjects with matching type from semester.
-     * 
+     *
      * @param type of Subjects
      * @return List of Subjects with matching type
      */

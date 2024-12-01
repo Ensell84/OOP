@@ -32,7 +32,7 @@ public class Subject {
     /**
      * Creates new subject with name and type.
      * Initially has no grade and not marked as final.
-     * 
+     *
      * @param name subject name
      * @param type type of subject exam
      */
