@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import ru.nsu.bondar.Subject.SubjectType;
 
@@ -195,16 +194,16 @@ public class GradeBook {
      * @return true if possible, otherwise false
      */
     public boolean canGetRedDiploma() {
-        Stream<Subject> finals = getFinalSubjects().stream().filter(subj -> subj.getGrade() != null);
-        long totalGrades = finals.count();
+        List<Subject> finals = getFinalSubjects().stream().filter(subj -> subj.getGrade() != null).toList();
+        long totalGrades = finals.size();
 
-        long goodGrades = finals
+        long goodGrades = finals.stream()
                 .filter(subj -> subj.getGrade() == 4)
                 .count();
 
         boolean goodPercentage = (double) goodGrades / totalGrades <= 0.25;
 
-        boolean noUnsatisfactory = finals
+        boolean noUnsatisfactory = finals.stream()
                 .noneMatch(subj -> subj.getGrade() < 4);
 
         boolean allCreditPass = semesters.stream()
@@ -212,9 +211,9 @@ public class GradeBook {
                 .filter(subj -> subj.getGrade() != null)
                 .noneMatch(subj -> subj.getGrade() == 0);
 
-        Integer qualWorkGrade = semesters.getLast().getSubjectsByType(SubjectType.QUALIFICATION_WORK)
+        Integer qualWorkGrade = semesters.get(semesters.size() - 1).getSubjectsByType(SubjectType.QUALIFICATION_WORK)
                 .get(0).getGrade();
-        boolean qualWorkExcellent = (qualWorkGrade == null || qualWorkGrade == 5) ? true : false;
+        boolean qualWorkExcellent = qualWorkGrade == null || qualWorkGrade == 5;
 
         return goodPercentage && noUnsatisfactory && allCreditPass && qualWorkExcellent;
     }
