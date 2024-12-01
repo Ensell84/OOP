@@ -128,6 +128,38 @@ public class GradeBook {
                 .toList();
     }
 
+    /**
+     * Calculates the average grade for subjects that affect final grades.
+     * 
+     * @return Average grade or null if no graded subjects exist
+     */
+    public Double calculateAverageGrade() {
+        List<Subject> gradedSubjects = semesters.stream()
+                .flatMap(semester -> semester.getSubjects().stream())
+                .filter(subject -> subject.getType().affectsFinalGrades && subject.getGrade() != null)
+                .toList();
+
+        if (gradedSubjects.isEmpty()) {
+            return null;
+        }
+
+        return gradedSubjects.stream()
+                .mapToInt(Subject::getGrade)
+                .average()
+                .orElse(0.0);
+    }
+
+    /**
+     * Calculetes possibility of getting increased scolarship.
+     * Increased scolarship is paid when average grade >= 4.5.
+     * 
+     * @return true, if possible, otherwise false
+     */
+    public boolean canReceiveIncreasedScholarship() {
+        Double average = calculateAverageGrade();
+        return average != null && average >= 4.5;
+    }
+
     public List<Semester> getSemesters() {
         return semesters;
     }
