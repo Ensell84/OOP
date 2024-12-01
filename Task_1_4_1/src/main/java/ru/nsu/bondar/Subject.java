@@ -12,7 +12,7 @@ public class Subject {
     public enum SubjectType {
         EXAM(true),
         DIFF_CREDIT(true),
-        CREDIT(true),
+        CREDIT(false),
         QUALIFICATION_WORK(true),
         COLLOQUIUM(false),
         CONTROL_WORK(false);
