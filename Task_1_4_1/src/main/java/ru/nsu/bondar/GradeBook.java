@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import ru.nsu.bondar.Subject.SubjectType;
 
@@ -147,6 +148,75 @@ public class GradeBook {
                 .mapToInt(Subject::getGrade)
                 .average()
                 .orElse(0.0);
+    }
+
+    /**
+     * Calculates possibility of transfering from Paid to Budget.
+     * Transfer is valid, if this conditions for last 2 semesters are true:
+     * all exams subjects grade > 3, all differential credit subjects grade > 2, all
+     * credit subjects are passed.
+     * 
+     * @return true if possible, otherwise false
+     */
+    public boolean canTransferToBudget() {
+        List<Semester> lastTwoSem = semesters.subList(student.getCurrentSemester() - 2, student.getCurrentSemester());
+
+        boolean examGrade = lastTwoSem.stream()
+                .flatMap(sem -> sem.getSubjectsByType(SubjectType.EXAM).stream())
+                .filter(subj -> subj.getGrade() != null)
+                .anyMatch(subj -> subj.getGrade() < 4);
+
+        boolean diffCreditGrade = lastTwoSem.stream()
+                .flatMap(sem -> sem.getSubjectsByType(SubjectType.DIFF_CREDIT).stream())
+                .filter(subj -> subj.getGrade() != null)
+                .anyMatch(subj -> subj.getGrade() < 3);
+
+        boolean creditGrade = lastTwoSem.stream()
+                .flatMap(sem -> sem.getSubjectsByType(SubjectType.CREDIT).stream())
+                .filter(subj -> subj.getGrade() != null)
+                .anyMatch(subj -> subj.getGrade() == 0);
+
+        if (examGrade || diffCreditGrade || creditGrade) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Calculates possibility of getting Red Diploma.
+     * It is possible to get Red Diploma, if this conditions are true: 75% of final
+     * grades are "5" and there is no "3" final grades, all credits are passed,
+     * qualification work grade is "5".
+     * 
+     * Calculation takes care about current state of GradeBook, so it precalculates
+     * possibility of getting Red Diploma, even if current semester is not final.
+     * 
+     * @return true if possible, otherwise false
+     */
+    public boolean canGetRedDiploma() {
+        Stream<Subject> finals = getFinalSubjects().stream().filter(subj -> subj.getGrade() != null);
+        long totalGrades = finals.count();
+
+        long goodGrades = finals
+                .filter(subj -> subj.getGrade() == 4)
+                .count();
+
+        boolean goodPercentage = (double) goodGrades / totalGrades <= 0.25;
+
+        boolean noUnsatisfactory = finals
+                .noneMatch(subj -> subj.getGrade() < 4);
+
+        boolean allCreditPass = semesters.stream()
+                .flatMap(sem -> sem.getSubjectsByType(SubjectType.CREDIT).stream())
+                .filter(subj -> subj.getGrade() != null)
+                .noneMatch(subj -> subj.getGrade() == 0);
+
+        Integer qualWorkGrade = semesters.getLast().getSubjectsByType(SubjectType.QUALIFICATION_WORK)
+                .get(0).getGrade();
+        boolean qualWorkExcellent = (qualWorkGrade == null || qualWorkGrade == 5) ? true : false;
+
+        return goodPercentage && noUnsatisfactory && allCreditPass && qualWorkExcellent;
     }
 
     /**
