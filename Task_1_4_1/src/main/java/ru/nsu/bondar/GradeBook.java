@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
-
 import ru.nsu.bondar.Subject.SubjectType;
 
 /**
@@ -131,7 +130,6 @@ public class GradeBook {
     public void saveToCsv(String configName) throws IOException {
         Path outputDir = Paths.get("output");
         Files.createDirectories(outputDir);
-        Path outputPath = outputDir.resolve(configName);
     
         StringBuilder csv = new StringBuilder();
     
@@ -151,7 +149,8 @@ public class GradeBook {
                         .append("\n");
             }
         }
-    
+
+        Path outputPath = outputDir.resolve(configName);
         Files.write(outputPath, csv.toString().getBytes());
     }
 
@@ -224,8 +223,7 @@ public class GradeBook {
      * grades are "5" and there is no "3" final grades, all credits are passed,
      * qualification work grade is "5".
      *
-     * <p>
-     * Calculation takes care about current state of GradeBook, so it precalculates
+     * <p>Calculation takes care about current state of GradeBook, so it precalculates
      * possibility of getting Red Diploma, even if current semester is not final.
      *
      * @return true if possible, otherwise false
