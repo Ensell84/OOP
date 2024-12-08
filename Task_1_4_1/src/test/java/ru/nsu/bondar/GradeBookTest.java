@@ -7,8 +7,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -150,6 +153,28 @@ class GradeBookTest {
         }
 
         assertTrue(gradeBook.canReceiveIncreasedScholarship());
+    }
+
+
+    @Test
+    public void testSaveToCsv() throws IOException {
+        GradeBook gradeBook = new GradeBook();
+        String inputPath = getClass().getClassLoader().getResource("config.csv").getPath();
+
+        gradeBook.loadFromCsv("config.csv");
+        gradeBook.saveToCsv("config.csv");
+
+        List<String> originalLines = Files.readAllLines(Paths.get(inputPath));
+        List<String> savedLines = Files.readAllLines(Paths.get("output/config.csv"));
+
+        for (int i = 0; i < 5; i++) {
+            assertEquals(originalLines.get(i), savedLines.get(i));
+        }
+
+        Set<String> originalSet = new HashSet<>(originalLines.subList(5, originalLines.size()));
+        Set<String> savedSet = new HashSet<>(savedLines.subList(5, savedLines.size()));
+
+        assertEquals(originalSet, savedSet);
     }
 
     private String createCsvContent(int currentSemester, SubjectData... subjects) {

@@ -1,8 +1,12 @@
 package ru.nsu.bondar;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -118,6 +122,40 @@ public class GradeBook {
     }
 
     /**
+     * Saves grade book data to a CSV file.
+     * File will contain student info in first 4 lines and subjects data after.
+     * Config file is saved to output folder.
+     *
+     * @param configName name of CSV file to save data to
+     */
+    public void saveToCsv(String configName) throws IOException {
+        Path outputDir = Paths.get("output");
+        Files.createDirectories(outputDir);
+        Path outputPath = outputDir.resolve(configName);
+    
+        StringBuilder csv = new StringBuilder();
+    
+        csv.append("studentGroup,").append(student.getStudentId()).append("\n");
+        csv.append("studentName,").append(student.getStudentName()).append("\n");
+        csv.append("isPaid,").append(student.isPaid()).append("\n");
+        csv.append("currentSemester,").append(student.getCurrentSemester()).append("\n");
+
+        csv.append("semester,name,type,grade\n");
+
+        for (Semester semester : semesters) {
+            for (Subject subject : semester.getSubjects()) {
+                csv.append(semester.getNumber()).append(",")
+                        .append(subject.getName()).append(",")
+                        .append(subject.getType()).append(",")
+                        .append(subject.getGrade() != null ? subject.getGrade() : "null")
+                        .append("\n");
+            }
+        }
+    
+        Files.write(outputPath, csv.toString().getBytes());
+    }
+
+    /**
      * Retrieves final subjects across all semesters.
      *
      * @return List of final subjects
@@ -186,7 +224,8 @@ public class GradeBook {
      * grades are "5" and there is no "3" final grades, all credits are passed,
      * qualification work grade is "5".
      *
-     * <p>Calculation takes care about current state of GradeBook, so it precalculates
+     * <p>
+     * Calculation takes care about current state of GradeBook, so it precalculates
      * possibility of getting Red Diploma, even if current semester is not final.
      *
      * @return true if possible, otherwise false
