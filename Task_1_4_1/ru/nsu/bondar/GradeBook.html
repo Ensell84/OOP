@@ -161,6 +161,11 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Loads grade book data from an input stream from CSV file.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#saveToCsv(java.lang.String)" class="member-name-link">saveToCsv</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;configName)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Saves grade book data to a CSV file.</div>
+</div>
 </div>
 </div>
 </div>
@@ -223,6 +228,22 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="saveToCsv(java.lang.String)">
+<h3>saveToCsv</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">saveToCsv</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;configName)</span>
+               throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
+<div class="block">Saves grade book data to a CSV file.
+ File will contain student info in first 4 lines and subjects data after.
+ Config file is saved to output folder.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>configName</code> - name of CSV file to save data to</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="getFinalSubjects()">
 <h3>getFinalSubjects</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Subject.html" title="class in ru.nsu.bondar">Subject</a>&gt;</span>&nbsp;<span class="element-name">getFinalSubjects</span>()</div>
@@ -267,7 +288,8 @@ loadScripts(document, 'script');</script>
  grades are "5" and there is no "3" final grades, all credits are passed,
  qualification work grade is "5".
 
- <p>Calculation takes care about current state of GradeBook, so it precalculates
+ <p>
+ Calculation takes care about current state of GradeBook, so it precalculates
  possibility of getting Red Diploma, even if current semester is not final.</div>
 <dl class="notes">
 <dt>Returns:</dt>
