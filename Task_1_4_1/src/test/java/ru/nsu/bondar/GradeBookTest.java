@@ -48,8 +48,8 @@ class GradeBookTest {
 
         List<Subject> subjectsInSem1 = gradeBook.getSemesters().get(0).getSubjects();
         assertEquals(2, subjectsInSem1.size());
-        assertTrue(subjectsInSem1.stream().
-                anyMatch(subj -> Objects.equals(subj.getName(), "Calculus I")));
+        assertTrue(subjectsInSem1.stream()
+                .anyMatch(subj -> Objects.equals(subj.getName(), "Calculus I")));
         assertTrue(subjectsInSem1.stream().noneMatch(subj -> subj.getGrade() == 3));
         assertTrue(subjectsInSem1.stream().allMatch(Subject::isFinal));
     }

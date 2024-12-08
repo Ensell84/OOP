@@ -11,7 +11,7 @@ public class Student {
 
     /**
      * Creates new student with parameters.
-     * 
+     *
      * @param group           student group id
      * @param name            student full name
      * @param isPaid          true if student is not on budget

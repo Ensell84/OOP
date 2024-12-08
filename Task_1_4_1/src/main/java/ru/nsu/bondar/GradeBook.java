@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
+
 import ru.nsu.bondar.Subject.SubjectType;
 
 /**
@@ -28,7 +29,7 @@ public class GradeBook {
      * Loads grade book data from a CSV file.
      * File should contain student info in first 4 lines and subjects data after
      * header.
-     * 
+     *
      * @param csvPath path to CSV file in resources folder
      * @throws RuntimeException if file is not found or parsing fails
      */
@@ -184,16 +185,16 @@ public class GradeBook {
      * It is possible to get Red Diploma, if this conditions are true: 75% of final
      * grades are "5" and there is no "3" final grades, all credits are passed,
      * qualification work grade is "5".
-     * <p>
-     * Calculation takes care about current state of GradeBook, so it precalculates
+     *
+     * <p>Calculation takes care about current state of GradeBook, so it precalculates
      * possibility of getting Red Diploma, even if current semester is not final.
-     * 
+     *
      * @return true if possible, otherwise false
      */
     public boolean canGetRedDiploma() {
-        List<Subject> finals = getFinalSubjects().stream().
-                filter(subj -> subj.getGrade() != null).
-                toList();
+        List<Subject> finals = getFinalSubjects().stream()
+                .filter(subj -> subj.getGrade() != null)
+                .toList();
         long totalGrades = finals.size();
 
         long goodGrades = finals.stream()
@@ -210,8 +211,8 @@ public class GradeBook {
                 .filter(subj -> subj.getGrade() != null)
                 .noneMatch(subj -> subj.getGrade() == 0);
 
-        Integer qualWorkGrade = semesters.getLast().
-                getSubjectsByType(SubjectType.QUALIFICATION_WORK).getFirst().getGrade();
+        Integer qualWorkGrade = semesters.getLast()
+                .getSubjectsByType(SubjectType.QUALIFICATION_WORK).getFirst().getGrade();
         boolean qualWorkExcellent = qualWorkGrade == null || qualWorkGrade == 5;
 
         return goodPercentage && noUnsatisfactory && allCreditPass && qualWorkExcellent;
