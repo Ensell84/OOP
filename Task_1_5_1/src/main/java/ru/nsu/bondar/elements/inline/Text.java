@@ -59,23 +59,25 @@ public class Text extends Element {
      * Checks if this Text object is equal to another object.
      * Two Text objects are considered equal if they have the same content,
      * the same bold, italic, strikethrough, and code formatting.
-     * 
+     *
      * @param o The object to compare to this Text object
      * @return True if the objects are equal, false otherwise.
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof Text))
+        }
+        if (!(o instanceof Text)) {
             return false;
+        }
 
         Text other = (Text) o;
-        return Objects.equals(content, other.content) &&
-                isBold == other.isBold &&
-                isItalic == other.isItalic &&
-                isStrikethrough == other.isStrikethrough &&
-                isCode == other.isCode;
+        return Objects.equals(content, other.content) 
+                && isBold == other.isBold
+                && isItalic == other.isItalic
+                && isStrikethrough == other.isStrikethrough
+                && isCode == other.isCode;
     }
 
     /**
@@ -101,8 +103,8 @@ public class Text extends Element {
 
         /**
          * Append content to the current content.
-         * 
-         * @param content
+         *
+         * @param content String to append to current content.
          * @return TextBuilder instance for further method chaining.
          */
         public TextBuilder appendContent(String content) {
@@ -112,7 +114,7 @@ public class Text extends Element {
 
         /**
          * Applie bold formatting to the text.
-         * 
+         *
          * @return TextBuilder instance for further method chaining.
          */
         public TextBuilder bold() {
@@ -122,7 +124,7 @@ public class Text extends Element {
 
         /**
          * Appilies italic formatting to the text.
-         * 
+         *
          * @return TextBuilder instance for further method chaining.
          */
         public TextBuilder italic() {
@@ -132,7 +134,7 @@ public class Text extends Element {
 
         /**
          * Appilies strikethrough formatting to the text.
-         * 
+         *
          * @return TextBuilder instance for further method chaining.
          */
         public TextBuilder strikethrough() {
