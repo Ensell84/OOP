@@ -86,36 +86,71 @@ public class Text extends Element {
         private boolean isStrikethrough;
         private boolean isCode;
 
+        /**
+         * Replaes current content with the provided.
+         *
+         * @param content String to replace current content with.
+         * @return TextBuilder instance for further method chaining.
+         */
         public TextBuilder content(String content) {
             this.content = content;
             return this;
         }
 
+        /**
+         * Append content to the current content.
+         * 
+         * @param content
+         * @return TextBuilder instance for further method chaining.
+         */
         public TextBuilder appendContent(String content) {
             this.content = this.content + content;
             return this;
         }
 
+        /**
+         * Applie bold formatting to the text.
+         * 
+         * @return TextBuilder instance for further method chaining.
+         */
         public TextBuilder bold() {
             this.isBold = true;
             return this;
         }
 
+        /**
+         * Appilies italic formatting to the text.
+         * 
+         * @return TextBuilder instance for further method chaining.
+         */
         public TextBuilder italic() {
             this.isItalic = true;
             return this;
         }
 
+        /**
+         * Appilies strikethrough formatting to the text.
+         * 
+         * @return TextBuilder instance for further method chaining.
+         */
         public TextBuilder strikethrough() {
             this.isStrikethrough = true;
             return this;
         }
 
+        /**
+         * Appilies code formatting to the text.
+         * 
+         * @return TextBuilder instance for further method chaining.
+         */
         public TextBuilder code() {
             this.isCode = true;
             return this;
         }
 
+        /**
+         * Resets all the formatting and content to default.
+         */
         @Override
         public void reset() {
             content = "";
@@ -125,6 +160,11 @@ public class Text extends Element {
             isCode = false;
         }
 
+        /**
+         * Builds the Text object using current state of the builder.
+         * 
+         * @throws IllegalStateException if content is empty.
+         */
         @Override
         public Text build() {
             if (content.isEmpty()) {
