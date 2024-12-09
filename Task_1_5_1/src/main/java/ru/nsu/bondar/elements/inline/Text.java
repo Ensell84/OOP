@@ -5,6 +5,11 @@ import java.util.Objects;
 import ru.nsu.bondar.Element;
 import ru.nsu.bondar.builder.MarkdownBuilder;
 
+/**
+ * Class representing the text element in Markdown syntax.
+ * This class is used to create inline text elements that
+ * can be formatted as bold, italic, strikethrough, and code.
+ */
 public class Text extends Element {
     private final String content;
     private final boolean isBold;
@@ -12,6 +17,12 @@ public class Text extends Element {
     private final boolean isStrikethrough;
     private final boolean isCode;
 
+    /**
+     * Constructor for the Text class. This constructor is private to prevent direct instantiation.
+     * Inner "Builder" class TextBuilder is used for building the Text object.
+     *
+     * @param builder The TextBuilder object
+     */
     private Text(TextBuilder builder) {
         this.content = builder.content;
         this.isBold = builder.isBold;
@@ -20,6 +31,9 @@ public class Text extends Element {
         this.isCode = builder.isCode;
     }
 
+    /**
+     * Serializes the Text object to its Markdown representation.
+     */
     @Override
     public String toMarkdown() {
         String result = content;
@@ -40,6 +54,13 @@ public class Text extends Element {
         return result;
     }
 
+    /**
+     * Checks if this Text object is equal to another object.
+     * Two Text objects are considered equal if they have the same content,
+     * the same bold, italic, strikethrough, and code formatting.
+     * 
+     * @param o The object to compare to this Text object
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -55,6 +76,9 @@ public class Text extends Element {
                 isCode == other.isCode;
     }
 
+    /**
+     * Static inner "Builder" class for building Text objects.
+     */
     public static class TextBuilder implements MarkdownBuilder {
         private String content = "";
         private boolean isBold;
