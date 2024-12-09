@@ -7,7 +7,7 @@ public class Table extends Element {
     //TODO
 
     @Override
-    public String serialize() {
+    public String toMarkdown() {
         return "";
     }
 
@@ -23,8 +23,8 @@ public class Table extends Element {
         }
 
         @Override
-        public String getResult() {
-            return "";
+        public Table build() {
+            return new Table();
         }
     }
 }
