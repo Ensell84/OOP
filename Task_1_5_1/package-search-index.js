@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"ru.nsu.bondar"},{"l":"ru.nsu.bondar.builder"},{"l":"ru.nsu.bondar.director"},{"l":"ru.nsu.bondar.elements.block"},{"l":"ru.nsu.bondar.elements.inline"}]
