@@ -1,7 +1,6 @@
 package ru.nsu.bondar.elements.inline;
 
 import java.util.Objects;
-
 import ru.nsu.bondar.Element;
 import ru.nsu.bondar.builder.MarkdownBuilder;
 
@@ -33,6 +32,8 @@ public class Text extends Element {
 
     /**
      * Serializes the Text object to its Markdown representation.
+     *
+     * @return A string containing the inline Text elment in Markdown format.
      */
     @Override
     public String toMarkdown() {
@@ -60,6 +61,7 @@ public class Text extends Element {
      * the same bold, italic, strikethrough, and code formatting.
      * 
      * @param o The object to compare to this Text object
+     * @return True if the objects are equal, false otherwise.
      */
     @Override
     public boolean equals(Object o) {
@@ -162,7 +164,8 @@ public class Text extends Element {
 
         /**
          * Builds the Text object using current state of the builder.
-         * 
+         *
+         * @return Cretaed Text object.
          * @throws IllegalStateException if content is empty.
          */
         @Override
