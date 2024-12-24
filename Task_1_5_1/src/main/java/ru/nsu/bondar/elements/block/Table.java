@@ -31,7 +31,33 @@ public class Table extends Element {
      */
     @Override
     public String toMarkdown() {
-        return "";
+        StringBuilder markdown = new StringBuilder();
+
+        if (!rows.isEmpty()) {
+            String[] header = rows.get(0);
+            markdown.append("| ");
+            for (String cell : header) {
+                markdown.append(cell).append(" | ");
+            }
+            markdown.append("\n");
+
+            markdown.append("| ");
+            for (String alignment : alignments) {
+                markdown.append(alignment).append(" | ");
+            }
+            markdown.append("\n");
+
+            for (int i = 1; i < rows.size(); i++) {
+                String[] row = rows.get(i);
+                markdown.append("| ");
+                for (String cell : row) {
+                    markdown.append(cell).append(" | ");
+                }
+                markdown.append("\n");
+            }
+        }
+
+        return markdown.toString();
     }
 
     /**
