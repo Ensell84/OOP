@@ -2,8 +2,12 @@ package ru.nsu.bondar.elements.block;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import ru.nsu.bondar.Element;
 
+/**
+ * Represents a markdown list.
+ */
 public class MarkdownList extends Element {
     private final List<ListItem> items;
 
@@ -11,6 +15,11 @@ public class MarkdownList extends Element {
         this.items = builder.items;
     }
 
+    /**
+     * Serializes the MarkdownList object to its Markdown representation.
+     *
+     * @return A string containing the list in Markdown format.
+     */
     @Override
     public String toMarkdown() {
         StringBuilder markdown = new StringBuilder();
@@ -20,6 +29,13 @@ public class MarkdownList extends Element {
         return markdown.toString().trim();
     }
 
+    /**
+     * Checks if this MarkdownList object is equal to another object.
+     * Two MarkdownList objects are considered equal if they have the same items.
+     *
+     * @param o The object to compare to this MarkdownList object.
+     * @return True if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -28,35 +44,72 @@ public class MarkdownList extends Element {
         return items.equals(other.items);
     }
 
+    /**
+     * Static inner "Builder" class for building MarkdownList objects.
+     */
     public static class MarkdownListBuilder {
         private final List<ListItem> items = new ArrayList<>();
 
+        /**
+         * Adds a regular item to the list.
+         *
+         * @param content The content of the item.
+         * @return MarkdownListBuilder instance for further method chaining.
+         */
         public MarkdownListBuilder addItem(String content) {
             items.add(new ListItem(content, false, false));
             return this;
         }
 
+        /**
+         * Adds a task item to the list.
+         *
+         * @param content The content of the task item.
+         * @param isChecked Whether the task item is checked.
+         * @return MarkdownListBuilder instance for further method chaining.
+         */
         public MarkdownListBuilder addTaskItem(String content, boolean isChecked) {
             items.add(new ListItem(content, true, isChecked));
             return this;
         }
 
+        /**
+         * Adds a nested list to the list.
+         *
+         * @param nestedList The nested MarkdownList to add.
+         * @return MarkdownListBuilder instance for further method chaining.
+         */
         public MarkdownListBuilder addNestedList(MarkdownList nestedList) {
             items.add(new ListItem(nestedList));
             return this;
         }
 
+        /**
+         * Builds the MarkdownList object using the current state of the builder.
+         *
+         * @return Created MarkdownList object.
+         */
         public MarkdownList build() {
             return new MarkdownList(this);
         }
     }
 
+    /**
+     * Represents an item in the markdown list.
+     */
     private static class ListItem {
         private final String content;
         private final boolean isTask;
         private final boolean isChecked;
         private final MarkdownList nestedList;
 
+        /**
+         * Constructor for a regular or task list item.
+         *
+         * @param content The content of the item.
+         * @param isTask Whether the item is a task.
+         * @param isChecked Whether the task item is checked.
+         */
         public ListItem(String content, boolean isTask, boolean isChecked) {
             this.content = content;
             this.isTask = isTask;
@@ -64,6 +117,11 @@ public class MarkdownList extends Element {
             this.nestedList = null;
         }
 
+        /**
+         * Constructor for a nested list item.
+         *
+         * @param nestedList The nested MarkdownList.
+         */
         public ListItem(MarkdownList nestedList) {
             this.content = null;
             this.isTask = false;
@@ -71,6 +129,11 @@ public class MarkdownList extends Element {
             this.nestedList = nestedList;
         }
 
+        /**
+         * Serializes the ListItem object to its Markdown representation.
+         *
+         * @return A string containing the item in Markdown format.
+         */
         public String toMarkdown() {
             if (nestedList != null) {
                 return nestedList.toMarkdown().replaceAll("(?m)^", "    ");
@@ -81,6 +144,14 @@ public class MarkdownList extends Element {
             return "- " + content;
         }
 
+        /**
+         * Checks if this ListItem object is equal to another object.
+         * Two ListItem objects are considered equal if they have the same content,
+         * task status, and nested list.
+         *
+         * @param o The object to compare to this ListItem object.
+         * @return True if the objects are equal, false otherwise.
+         */
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -88,8 +159,8 @@ public class MarkdownList extends Element {
             ListItem other = (ListItem) o;
             return isTask == other.isTask &&
                     isChecked == other.isChecked &&
-                    (content != null ? content.equals(other.content) : other.content == null) &&
-                    (nestedList != null ? nestedList.equals(other.nestedList) : other.nestedList == null);
+                    Objects.equals(content, other.content) &&
+                    Objects.equals(nestedList, other.nestedList);
         }
     }
 }
