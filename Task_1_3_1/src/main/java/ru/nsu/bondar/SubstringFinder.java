@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Utility-Класс для нахождения всех вхождений подстроки в файл.
@@ -17,15 +18,12 @@ public class SubstringFinder {
     /**
      * Находит все вхождения паттерн-строки в файл.
      *
-     * @param filename путь к input файлу
-     * @param pattern строка-паттерн для поиска
+     * @param filename путь к input файлу (не может быть null, аннотирован как NotNull)
+     * @param pattern строка-паттерн для поиска (не может быть null, аннотирован как NotNull)
      * @return Список индексов всех вхождений паттерна
      * @throws IOException в случае I/O ошибки
      */
-    public static List<Integer> find(String filename, String pattern) throws IOException {
-        if (filename == null || pattern == null) {
-            throw new IllegalArgumentException("Filename and pattern must not be null");
-        }
+    public static List<Integer> find(@NotNull String filename, @NotNull String pattern) throws IOException {
         if (pattern.isEmpty()) {
             throw new IllegalArgumentException("Pattern must not be empty");
         }
