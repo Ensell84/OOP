@@ -13,8 +13,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
-
 import org.jetbrains.annotations.NotNull;
+
 import ru.nsu.bondar.Subject.SubjectType;
 
 /**
