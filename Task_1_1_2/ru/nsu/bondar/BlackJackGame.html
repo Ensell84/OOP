@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":9,"i1":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":10,"i5":10,"i6":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -185,17 +185,52 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="Dealer.html" title="class in ru.nsu.bondar">Dealer</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDealer()">getDealer</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the dealer.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="Deck.html" title="class in ru.nsu.bondar">Deck</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDeck()">getDeck</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the deck.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="Player.html" title="class in ru.nsu.bondar">Player</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPlayer()">getPlayer</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the player.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#main(java.lang.String%5B%5D)">main</a></span>&#8203;(java.lang.String[]&nbsp;args)</code></th>
 <td class="colLast">
 <div class="block">The main method to start the Blackjack game.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#play()">play</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Starts and manages the game loop.</div>
+<div class="block">Starts the Blackjack game and continues to play rounds until the user decides to stop.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#playRound()">playRound</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Plays a single round of the game.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanner(java.util.Scanner)">setScanner</a></span>&#8203;(java.util.Scanner&nbsp;scanner)</code></th>
+<td class="colLast">
+<div class="block">Sets the scanner for user input.</div>
 </td>
 </tr>
 </table>
@@ -260,6 +295,72 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a id="setScanner(java.util.Scanner)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setScanner</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;setScanner&#8203;(java.util.Scanner&nbsp;scanner)</pre>
+<div class="block">Sets the scanner for user input.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>scanner</code> - the scanner to set</dd>
+</dl>
+</li>
+</ul>
+<a id="getDeck()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDeck</h4>
+<pre class="methodSignature">public&nbsp;<a href="Deck.html" title="class in ru.nsu.bondar">Deck</a>&nbsp;getDeck()</pre>
+<div class="block">Returns the deck.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the deck</dd>
+</dl>
+</li>
+</ul>
+<a id="getPlayer()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPlayer</h4>
+<pre class="methodSignature">public&nbsp;<a href="Player.html" title="class in ru.nsu.bondar">Player</a>&nbsp;getPlayer()</pre>
+<div class="block">Returns the player.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the player</dd>
+</dl>
+</li>
+</ul>
+<a id="getDealer()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDealer</h4>
+<pre class="methodSignature">public&nbsp;<a href="Dealer.html" title="class in ru.nsu.bondar">Dealer</a>&nbsp;getDealer()</pre>
+<div class="block">Returns the dealer.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the dealer</dd>
+</dl>
+</li>
+</ul>
+<a id="playRound()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>playRound</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;playRound()</pre>
+<div class="block">Plays a single round of the game.</div>
+</li>
+</ul>
 <a id="play()">
 <!--   -->
 </a>
@@ -267,7 +368,10 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>play</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;play()</pre>
-<div class="block">Starts and manages the game loop.</div>
+<div class="block">Starts the Blackjack game and continues to play rounds until the user decides to stop.
+ It welcomes the player, starts new rounds, and asks the player
+ if they want to play another round.
+ The game ends when the player responds with anything other than "yes".</div>
 </li>
 </ul>
 <a id="main(java.lang.String[])">
