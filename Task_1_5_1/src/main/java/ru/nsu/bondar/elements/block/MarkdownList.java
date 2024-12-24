@@ -78,6 +78,18 @@ public class MarkdownList extends Element {
         }
 
         /**
+         * Adds a task item to the list.
+         *
+         * @param element The inline element of the task item.
+         * @param isChecked Whether the task item is checked.
+         * @return MarkdownListBuilder instance for further method chaining.
+         */
+        public MarkdownListBuilder addTaskItem(Element element, boolean isChecked) {
+            items.add(new ListItem(element, true, isChecked));
+            return this;
+        }
+
+        /**
          * Adds a nested list to the list.
          *
          * @param nestedList The nested MarkdownList to add.
@@ -106,6 +118,7 @@ public class MarkdownList extends Element {
         private final boolean isTask;
         private final boolean isChecked;
         private final MarkdownList nestedList;
+        private final Element inlineElement;
 
         /**
          * Constructor for a regular or task list item.
@@ -119,6 +132,22 @@ public class MarkdownList extends Element {
             this.isTask = isTask;
             this.isChecked = isChecked;
             this.nestedList = null;
+            this.inlineElement = null;
+        }
+
+        /**
+         * Constructor for a task list item with an inline element.
+         *
+         * @param inlineElement The inline element.
+         * @param isTask Whether the item is a task.
+         * @param isChecked Whether the task item is checked.
+         */
+        public ListItem(Element inlineElement, boolean isTask, boolean isChecked) {
+            this.content = null;
+            this.isTask = isTask;
+            this.isChecked = isChecked;
+            this.nestedList = null;
+            this.inlineElement = inlineElement;
         }
 
         /**
@@ -131,6 +160,7 @@ public class MarkdownList extends Element {
             this.isTask = false;
             this.isChecked = false;
             this.nestedList = nestedList;
+            this.inlineElement = null;
         }
 
         /**
@@ -141,6 +171,12 @@ public class MarkdownList extends Element {
         public String toMarkdown() {
             if (nestedList != null) {
                 return nestedList.toMarkdown().replaceAll("(?m)^", "    ");
+            }
+            if (inlineElement != null) {
+                if (isTask) {
+                    return "- [" + (isChecked ? "x" : " ") + "] " + inlineElement.toMarkdown();
+                }
+                return "- " + inlineElement.toMarkdown();
             }
             if (isTask) {
                 return "- [" + (isChecked ? "x" : " ") + "] " + content;
@@ -168,7 +204,8 @@ public class MarkdownList extends Element {
             return isTask == other.isTask
                     && isChecked == other.isChecked
                     && Objects.equals(content, other.content)
-                    && Objects.equals(nestedList, other.nestedList);
+                    && Objects.equals(nestedList, other.nestedList)
+                    && Objects.equals(inlineElement, other.inlineElement);
         }
     }
 }

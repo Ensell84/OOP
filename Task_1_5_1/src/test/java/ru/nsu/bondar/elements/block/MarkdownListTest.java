@@ -3,6 +3,7 @@ package ru.nsu.bondar.elements.block;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.bondar.elements.inline.Text;
 
 class MarkdownListTest {
 
@@ -38,6 +39,16 @@ class MarkdownListTest {
                 .addItem("Item 2")
                 .build();
         String expectedMarkdown = "- Item 1\n    - Nested Item 1\n    - Nested Item 2\n- Item 2";
+        assertEquals(expectedMarkdown, list.toMarkdown());
+    }
+
+    @Test
+    void testAddInlineElement() {
+        Text boldText = new Text.TextBuilder().content("Bold Text").bold().build();
+        MarkdownList list = new MarkdownList.MarkdownListBuilder()
+                .addTaskItem(boldText, true)
+                .build();
+        String expectedMarkdown = "- [x] **Bold Text**";
         assertEquals(expectedMarkdown, list.toMarkdown());
     }
 }
