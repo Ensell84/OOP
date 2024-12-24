@@ -40,4 +40,31 @@ public class TableTest {
                 + "| 2 | _Italic_ |";
         assertEquals(expectedMarkdown, table.toMarkdown());
     }
+
+    @Test
+    void tableEquality() {
+        Table table1 = new Table.TableBuilder()
+                .withAlignments(Table.ALIGN_LEFT, Table.ALIGN_RIGHT)
+                .addRow("Header1", "Header2")
+                .addRow("Row1Col1", "Row1Col2")
+                .addRow("Row2Col1", "Row2Col2")
+                .build();
+
+        Table table2 = new Table.TableBuilder()
+                .withAlignments(Table.ALIGN_LEFT, Table.ALIGN_RIGHT)
+                .addRow("Header1", "Header2")
+                .addRow("Row1Col1", "Row1Col2")
+                .addRow("Row2Col1", "Row2Col2")
+                .build();
+
+        Table table3 = new Table.TableBuilder()
+                .withAlignments(Table.ALIGN_LEFT, Table.ALIGN_CENTER)
+                .addRow("Header1", "Header2")
+                .addRow("Row1Col1", "Row1Col2")
+                .addRow("Row2Col1", "Row2Col2")
+                .build();
+
+        assertEquals(table1, table2);
+        assertNotEquals(table1, table3);
+    }
 }

@@ -1,6 +1,7 @@
 package ru.nsu.bondar.elements.block;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import ru.nsu.bondar.Element;
@@ -91,9 +92,13 @@ public class Table extends Element {
         }
 
         Table other = (Table) o;
-        return rowLimit == other.rowLimit
-                && Objects.equals(rows, other.rows)
-                && Objects.equals(alignments, other.alignments);
+
+        boolean rowsEqual = true;
+        for (int i = 0; i < rows.size(); i++) {
+            rowsEqual = rowsEqual && Arrays.equals(rows.get(i), other.rows.get(i));
+        }
+
+        return rowsEqual && Arrays.equals(alignments, other.alignments);
     }
 
     /**
