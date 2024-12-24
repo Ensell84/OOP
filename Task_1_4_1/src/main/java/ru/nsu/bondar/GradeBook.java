@@ -13,6 +13,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
+
+import org.jetbrains.annotations.NotNull;
 import ru.nsu.bondar.Subject.SubjectType;
 
 /**
@@ -33,13 +35,10 @@ public class GradeBook {
      * File should contain student info in first 4 lines and subjects data after
      * header.
      *
-     * @param csvPath path to CSV file in resources folder
+     * @param csvPath path to CSV file in resources folder (must be non-null, annotated with @NotNull)
      * @throws RuntimeException if file is not found or parsing fails
      */
-    public void loadFromCsv(String csvPath) {
-        if (csvPath == null) {
-            throw new RuntimeException("Path to CSV config file cannot be null");
-        }
+    public void loadFromCsv(@NotNull String csvPath) throws IOException {
         InputStream inputStream = this.getClass().getResourceAsStream("/" + csvPath);
         loadFromCsvStream(inputStream);
     }
@@ -49,13 +48,10 @@ public class GradeBook {
      * File should contain student info in first 4 lines and subjects data after
      * header.
      *
-     * @param inputStream InputStream from a CSV file
+     * @param inputStream InputStream from a CSV file (must be non-null, annotated with @NotNull)
      * @throws RuntimeException if file is not found or parsing fails
      */
-    public void loadFromCsvStream(InputStream inputStream) {
-        if (inputStream == null) {
-            throw new RuntimeException("InputStream cannot be null");
-        }
+    public void loadFromCsvStream(@NotNull InputStream inputStream) throws IOException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String[] studentGroupRow = reader.readLine().split(",");
             String[] studentNameRow = reader.readLine().split(",");
@@ -114,9 +110,6 @@ public class GradeBook {
 
                 semesters.get(semester - 1).addSubject(subject);
             });
-
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to initialize grade book: " + e.getMessage(), e);
         }
     }
 
