@@ -38,8 +38,12 @@ public class MarkdownList extends Element {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MarkdownList)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof MarkdownList)) {
+            return false;
+        }
         MarkdownList other = (MarkdownList) o;
         return items.equals(other.items);
     }
@@ -154,13 +158,17 @@ public class MarkdownList extends Element {
          */
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof ListItem)) return false;
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof ListItem)) {
+                return false;
+            }
             ListItem other = (ListItem) o;
-            return isTask == other.isTask &&
-                    isChecked == other.isChecked &&
-                    Objects.equals(content, other.content) &&
-                    Objects.equals(nestedList, other.nestedList);
+            return isTask == other.isTask
+                    && isChecked == other.isChecked
+                    && Objects.equals(content, other.content)
+                    && Objects.equals(nestedList, other.nestedList);
         }
     }
 }
