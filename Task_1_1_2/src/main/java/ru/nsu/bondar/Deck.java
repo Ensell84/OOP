@@ -36,4 +36,13 @@ public class Deck {
     public Card drawCard() {
         return cards.remove(cards.size() - 1);
     }
+
+    /**
+     * Returns the list of cards in the deck.
+     *
+     * @return the list of cards in the deck
+     */
+    public List<Card> getCards() {
+        return cards;
+    }
 }
