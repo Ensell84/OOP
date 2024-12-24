@@ -23,7 +23,8 @@ public class SubstringFinder {
      * @return Список индексов всех вхождений паттерна
      * @throws IOException в случае I/O ошибки
      */
-    public static List<Integer> find(@NotNull String filename, @NotNull String pattern) throws IOException {
+    public static List<Integer> find(@NotNull String filename,
+                                     @NotNull String pattern) throws IOException {
         if (pattern.isEmpty()) {
             throw new IllegalArgumentException("Pattern must not be empty");
         }

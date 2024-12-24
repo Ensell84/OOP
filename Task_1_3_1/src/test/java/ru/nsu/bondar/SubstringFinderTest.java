@@ -1,7 +1,6 @@
 package ru.nsu.bondar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedWriter;
@@ -68,13 +67,13 @@ public class SubstringFinderTest {
 
     @Test
     void testLargeFile() throws IOException {
-        int sizeInMb = 5000;
+        long sizeInMb = 15000;
         String pattern = "test";
-        int totalChunks = (sizeInMb * 1024 * 1024) / pattern.length();
+        long totalChunks = (sizeInMb * 1024 * 1024) / pattern.length();
 
         Path testFile = tempDir.resolve("test.txt");
         try (BufferedWriter writer = Files.newBufferedWriter(testFile)) {
-            for (int i = 0; i < totalChunks; i++) {
+            for (long i = 0; i < totalChunks; i++) {
                 if (i % 1000 == 0) {
                     writer.write(pattern);
                 } else {
