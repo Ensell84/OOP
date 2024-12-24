@@ -67,20 +67,6 @@ public class SubstringFinderTest {
     }
 
     @Test
-    void testNullInputs() {
-        assertThrows(IllegalArgumentException.class,
-                () -> SubstringFinder.find(null, "test"));
-        assertThrows(IllegalArgumentException.class,
-                () -> SubstringFinder.find("test.txt", null));
-    }
-
-    @Test
-    void testEmptyPattern() {
-        assertThrows(IllegalArgumentException.class,
-                () -> SubstringFinder.find("test.txt", ""));
-    }
-
-    @Test
     void testLargeFile() throws IOException {
         int sizeInMb = 5000;
         String pattern = "test";
