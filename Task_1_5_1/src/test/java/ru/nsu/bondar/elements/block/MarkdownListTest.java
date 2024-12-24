@@ -1,0 +1,77 @@
+package ru.nsu.bondar.elements.block;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import org.junit.jupiter.api.Test;
+import ru.nsu.bondar.elements.inline.Text;
+
+class MarkdownListTest {
+
+    @Test
+    void testAddItem() {
+        MarkdownList list = new MarkdownList.MarkdownListBuilder()
+                .addItem("Item 1")
+                .addItem("Item 2")
+                .build();
+        String expectedMarkdown = "- Item 1\n- Item 2";
+        assertEquals(expectedMarkdown, list.toMarkdown());
+    }
+
+    @Test
+    void testAddTaskItem() {
+        MarkdownList list = new MarkdownList.MarkdownListBuilder()
+                .addTaskItem("Task 1", true)
+                .addTaskItem("Task 2", false)
+                .build();
+        String expectedMarkdown = "- [x] Task 1\n- [ ] Task 2";
+        assertEquals(expectedMarkdown, list.toMarkdown());
+    }
+
+    @Test
+    void testAddNestedList() {
+        MarkdownList nestedList = new MarkdownList.MarkdownListBuilder()
+                .addItem("Nested Item 1")
+                .addItem("Nested Item 2")
+                .build();
+        MarkdownList list = new MarkdownList.MarkdownListBuilder()
+                .addItem("Item 1")
+                .addNestedList(nestedList)
+                .addItem("Item 2")
+                .build();
+        String expectedMarkdown = "- Item 1\n    - Nested Item 1\n    - Nested Item 2\n- Item 2";
+        assertEquals(expectedMarkdown, list.toMarkdown());
+    }
+
+    @Test
+    void testAddInlineElement() {
+        Text boldText = new Text.TextBuilder().content("Bold Text").bold().build();
+        MarkdownList list = new MarkdownList.MarkdownListBuilder()
+                .addTaskItem(boldText, true)
+                .build();
+        String expectedMarkdown = "- [x] **Bold Text**";
+        assertEquals(expectedMarkdown, list.toMarkdown());
+    }
+
+    @Test
+    void testEquals() {
+        MarkdownList list1 = new MarkdownList.MarkdownListBuilder()
+                .addItem("Item 1")
+                .addItem("Item 2")
+                .build();
+
+        MarkdownList list2 = new MarkdownList.MarkdownListBuilder()
+                .addItem("Item 1")
+                .addItem("Item 2")
+                .build();
+
+        MarkdownList list3 = new MarkdownList.MarkdownListBuilder()
+                .addItem("Item 1")
+                .addItem("Item 3")
+                .build();
+
+        assertEquals(list1, list2);
+        assertNotEquals(list1, list3);
+        assertNotEquals(list1, null);
+    }
+}
