@@ -8,6 +8,7 @@ import ru.nsu.bondar.builder.MarkdownBuilder;
  * Class representing a link in Markdown.
  */
 public class Link extends Element {
+    public final boolean isInline = true;
     private final String url;
     private final String text;
     private final boolean isImage;

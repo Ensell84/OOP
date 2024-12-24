@@ -3,7 +3,6 @@ package ru.nsu.bondar.elements.block;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import ru.nsu.bondar.Element;
 import ru.nsu.bondar.builder.MarkdownBuilder;
 
@@ -11,6 +10,8 @@ import ru.nsu.bondar.builder.MarkdownBuilder;
  * Class representing a table in Markdown.
  */
 public class Table extends Element {
+    public final boolean isInline = false;
+
     public static final String ALIGN_LEFT = ":---";
     public static final String ALIGN_CENTER = ":---:";
     public static final String ALIGN_RIGHT = "---:";
@@ -121,7 +122,11 @@ public class Table extends Element {
             if (rows.size() < rowLimit) {
                 String[] row = new String[cells.length];
                 for (int i = 0; i < cells.length; i++) {
-                    row[i] = cells[i].toString();
+                    if (cells[i] instanceof Element) {
+                        row[i] = ((Element) cells[i]).toMarkdown();
+                    } else {
+                        row[i] = cells[i].toString();
+                    }
                 }
                 rows.add(row);
             }

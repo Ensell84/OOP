@@ -10,6 +10,7 @@ import ru.nsu.bondar.builder.MarkdownBuilder;
  * can be formatted as bold, italic, strikethrough, and code.
  */
 public class Text extends Element {
+    public final boolean isInline = true;
     private final String content;
     private final boolean isBold;
     private final boolean isItalic;

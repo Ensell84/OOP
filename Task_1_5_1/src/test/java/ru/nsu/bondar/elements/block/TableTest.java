@@ -31,8 +31,8 @@ public class TableTest {
         Table table = new Table.TableBuilder()
                 .withAlignments(Table.ALIGN_LEFT, Table.ALIGN_RIGHT)
                 .addRow("Index", "Random")
-                .addRow("1", new Text.TextBuilder().content("Bold").bold().build().toMarkdown())
-                .addRow("2", new Text.TextBuilder().content("Italic").italic().build().toMarkdown())
+                .addRow("1", new Text.TextBuilder().content("Bold").bold().build())
+                .addRow("2", new Text.TextBuilder().content("Italic").italic().build())
                 .build();
         String expectedMarkdown = "| Index | Random |\n"
                 + "| :--- | ---: |\n"
