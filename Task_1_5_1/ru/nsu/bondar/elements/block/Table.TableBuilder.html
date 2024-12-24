@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -185,17 +185,38 @@ implements <a href="../../builder/MarkdownBuilder.html" title="interface in ru.n
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="Table.TableBuilder.html" title="class in ru.nsu.bondar.elements.block">Table.TableBuilder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addRow(java.lang.Object...)">addRow</a></span>&#8203;(java.lang.Object...&nbsp;cells)</code></th>
+<td class="colLast">
+<div class="block">Adds a row to the table.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="Table.html" title="class in ru.nsu.bondar.elements.block">Table</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#build()">build</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Builds the Table object using current state of the builder.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#reset()">reset</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Resets the TableBuilder to its initial state.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="Table.TableBuilder.html" title="class in ru.nsu.bondar.elements.block">Table.TableBuilder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withAlignments(java.lang.String...)">withAlignments</a></span>&#8203;(java.lang.String...&nbsp;alignments)</code></th>
+<td class="colLast">
+<div class="block">Sets the alignments for the table columns.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="Table.TableBuilder.html" title="class in ru.nsu.bondar.elements.block">Table.TableBuilder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withRowLimit(int)">withRowLimit</a></span>&#8203;(int&nbsp;rowLimit)</code></th>
+<td class="colLast">
+<div class="block">Sets the row limit for the table.</div>
 </td>
 </tr>
 </table>
@@ -241,6 +262,54 @@ implements <a href="../../builder/MarkdownBuilder.html" title="interface in ru.n
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a id="withAlignments(java.lang.String...)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withAlignments</h4>
+<pre class="methodSignature">public&nbsp;<a href="Table.TableBuilder.html" title="class in ru.nsu.bondar.elements.block">Table.TableBuilder</a>&nbsp;withAlignments&#8203;(java.lang.String...&nbsp;alignments)</pre>
+<div class="block">Sets the alignments for the table columns.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>alignments</code> - The alignments to set.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>TableBuilder instance for further method chaining.</dd>
+</dl>
+</li>
+</ul>
+<a id="withRowLimit(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withRowLimit</h4>
+<pre class="methodSignature">public&nbsp;<a href="Table.TableBuilder.html" title="class in ru.nsu.bondar.elements.block">Table.TableBuilder</a>&nbsp;withRowLimit&#8203;(int&nbsp;rowLimit)</pre>
+<div class="block">Sets the row limit for the table.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>rowLimit</code> - The row limit to set.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>TableBuilder instance for further method chaining.</dd>
+</dl>
+</li>
+</ul>
+<a id="addRow(java.lang.Object...)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>addRow</h4>
+<pre class="methodSignature">public&nbsp;<a href="Table.TableBuilder.html" title="class in ru.nsu.bondar.elements.block">Table.TableBuilder</a>&nbsp;addRow&#8203;(java.lang.Object...&nbsp;cells)</pre>
+<div class="block">Adds a row to the table.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>cells</code> - The cells to add.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>TableBuilder instance for further method chaining.</dd>
+</dl>
+</li>
+</ul>
 <a id="reset()">
 <!--   -->
 </a>

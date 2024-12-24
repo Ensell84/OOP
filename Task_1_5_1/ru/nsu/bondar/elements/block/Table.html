@@ -89,14 +89,14 @@ loadScripts(document, 'script');</script>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -138,7 +138,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">Table</span>
 extends <a href="../../Element.html" title="class in ru.nsu.bondar">Element</a></pre>
-<div class="block">Class represeinting a table in Markdown.</div>
+<div class="block">Class representing a table in Markdown.</div>
 </li>
 </ul>
 </div>
@@ -170,21 +170,33 @@ extends <a href="../../Element.html" title="class in ru.nsu.bondar">Element</a><
 </li>
 </ul>
 </section>
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<!-- =========== FIELD SUMMARY =========== -->
 <section>
 <ul class="blockList">
-<li class="blockList"><a id="constructor.summary">
+<li class="blockList"><a id="field.summary">
 <!--   -->
 </a>
-<h3>Constructor Summary</h3>
+<h3>Field Summary</h3>
 <table class="memberSummary">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colFirst" scope="col">Constructor</th>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Field</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">Table</a></span>()</code></th>
+<td class="colFirst"><code>static java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ALIGN_CENTER">ALIGN_CENTER</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ALIGN_LEFT">ALIGN_LEFT</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ALIGN_RIGHT">ALIGN_RIGHT</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -209,7 +221,7 @@ extends <a href="../../Element.html" title="class in ru.nsu.bondar">Element</a><
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(java.lang.Object&nbsp;o)</code></th>
 <td class="colLast">
-<div class="block">Checks if this Tabble object is equal to another object.</div>
+<div class="block">Checks if this Table object is equal to another object.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -236,20 +248,50 @@ extends <a href="../../Element.html" title="class in ru.nsu.bondar">Element</a><
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<!-- ============ FIELD DETAIL =========== -->
 <section>
 <ul class="blockList">
-<li class="blockList"><a id="constructor.detail">
+<li class="blockList"><a id="field.detail">
 <!--   -->
 </a>
-<h3>Constructor Detail</h3>
-<a id="&lt;init&gt;()">
+<h3>Field Detail</h3>
+<a id="ALIGN_LEFT">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ALIGN_LEFT</h4>
+<pre>public static final&nbsp;java.lang.String ALIGN_LEFT</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../constant-values.html#ru.nsu.bondar.elements.block.Table.ALIGN_LEFT">Constant Field Values</a></dd>
+</dl>
+</li>
+</ul>
+<a id="ALIGN_CENTER">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ALIGN_CENTER</h4>
+<pre>public static final&nbsp;java.lang.String ALIGN_CENTER</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../constant-values.html#ru.nsu.bondar.elements.block.Table.ALIGN_CENTER">Constant Field Values</a></dd>
+</dl>
+</li>
+</ul>
+<a id="ALIGN_RIGHT">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>Table</h4>
-<pre>public&nbsp;Table()</pre>
+<h4>ALIGN_RIGHT</h4>
+<pre>public static final&nbsp;java.lang.String ALIGN_RIGHT</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../constant-values.html#ru.nsu.bondar.elements.block.Table.ALIGN_RIGHT">Constant Field Values</a></dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -285,7 +327,7 @@ extends <a href="../../Element.html" title="class in ru.nsu.bondar">Element</a><
 <li class="blockList">
 <h4>equals</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;equals&#8203;(java.lang.Object&nbsp;o)</pre>
-<div class="block">Checks if this Tabble object is equal to another object.</div>
+<div class="block">Checks if this Table object is equal to another object.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../Element.html#equals(java.lang.Object)">equals</a></code>&nbsp;in class&nbsp;<code><a href="../../Element.html" title="class in ru.nsu.bondar">Element</a></code></dd>
@@ -348,14 +390,14 @@ extends <a href="../../Element.html" title="class in ru.nsu.bondar">Element</a><
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
