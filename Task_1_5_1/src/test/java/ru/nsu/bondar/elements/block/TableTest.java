@@ -42,6 +42,21 @@ public class TableTest {
     }
 
     @Test
+    void tableWithRowLimit() {
+        Table table = new Table.TableBuilder()
+                .withAlignments(Table.ALIGN_LEFT, Table.ALIGN_RIGHT)
+                .withRowLimit(2)
+                .addRow("Header1", "Header2")
+                .addRow("Row1Col1", "Row1Col2")
+                .addRow("Row2Col1", "Row2Col2")
+                .build();
+        String expectedMarkdown = "| Header1 | Header2 |\n"
+                + "| :--- | ---: |\n"
+                + "| Row1Col1 | Row1Col2 |";
+        assertEquals(expectedMarkdown, table.toMarkdown());
+    }
+
+    @Test
     void tableEquality() {
         Table table1 = new Table.TableBuilder()
                 .withAlignments(Table.ALIGN_LEFT, Table.ALIGN_RIGHT)
