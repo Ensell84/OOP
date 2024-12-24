@@ -137,6 +137,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public static class <span class="typeNameLabel">MarkdownList.MarkdownListBuilder</span>
 extends java.lang.Object</pre>
+<div class="block">Static inner "Builder" class for building MarkdownList objects.</div>
 </li>
 </ul>
 </div>
@@ -181,23 +182,31 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="MarkdownList.MarkdownListBuilder.html" title="class in ru.nsu.bondar.elements.block">MarkdownList.MarkdownListBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addItem(java.lang.String)">addItem</a></span>&#8203;(java.lang.String&nbsp;content)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Adds a regular item to the list.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="MarkdownList.MarkdownListBuilder.html" title="class in ru.nsu.bondar.elements.block">MarkdownList.MarkdownListBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addNestedList(ru.nsu.bondar.elements.block.MarkdownList)">addNestedList</a></span>&#8203;(<a href="MarkdownList.html" title="class in ru.nsu.bondar.elements.block">MarkdownList</a>&nbsp;nestedList)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Adds a nested list to the list.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="MarkdownList.MarkdownListBuilder.html" title="class in ru.nsu.bondar.elements.block">MarkdownList.MarkdownListBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addTaskItem(java.lang.String,boolean)">addTaskItem</a></span>&#8203;(java.lang.String&nbsp;content,
            boolean&nbsp;isChecked)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Adds a task item to the list.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="MarkdownList.html" title="class in ru.nsu.bondar.elements.block">MarkdownList</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#build()">build</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Builds the MarkdownList object using the current state of the builder.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -249,6 +258,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>addItem</h4>
 <pre class="methodSignature">public&nbsp;<a href="MarkdownList.MarkdownListBuilder.html" title="class in ru.nsu.bondar.elements.block">MarkdownList.MarkdownListBuilder</a>&nbsp;addItem&#8203;(java.lang.String&nbsp;content)</pre>
+<div class="block">Adds a regular item to the list.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>content</code> - The content of the item.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>MarkdownListBuilder instance for further method chaining.</dd>
+</dl>
 </li>
 </ul>
 <a id="addTaskItem(java.lang.String,boolean)">
@@ -259,6 +275,14 @@ extends java.lang.Object</pre>
 <h4>addTaskItem</h4>
 <pre class="methodSignature">public&nbsp;<a href="MarkdownList.MarkdownListBuilder.html" title="class in ru.nsu.bondar.elements.block">MarkdownList.MarkdownListBuilder</a>&nbsp;addTaskItem&#8203;(java.lang.String&nbsp;content,
                                                     boolean&nbsp;isChecked)</pre>
+<div class="block">Adds a task item to the list.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>content</code> - The content of the task item.</dd>
+<dd><code>isChecked</code> - Whether the task item is checked.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>MarkdownListBuilder instance for further method chaining.</dd>
+</dl>
 </li>
 </ul>
 <a id="addNestedList(ru.nsu.bondar.elements.block.MarkdownList)">
@@ -268,6 +292,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>addNestedList</h4>
 <pre class="methodSignature">public&nbsp;<a href="MarkdownList.MarkdownListBuilder.html" title="class in ru.nsu.bondar.elements.block">MarkdownList.MarkdownListBuilder</a>&nbsp;addNestedList&#8203;(<a href="MarkdownList.html" title="class in ru.nsu.bondar.elements.block">MarkdownList</a>&nbsp;nestedList)</pre>
+<div class="block">Adds a nested list to the list.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>nestedList</code> - The nested MarkdownList to add.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>MarkdownListBuilder instance for further method chaining.</dd>
+</dl>
 </li>
 </ul>
 <a id="build()">
@@ -277,6 +308,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>build</h4>
 <pre class="methodSignature">public&nbsp;<a href="MarkdownList.html" title="class in ru.nsu.bondar.elements.block">MarkdownList</a>&nbsp;build()</pre>
+<div class="block">Builds the MarkdownList object using the current state of the builder.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Created MarkdownList object.</dd>
+</dl>
 </li>
 </ul>
 </li>
