@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
 import org.jetbrains.annotations.NotNull;
-
 import ru.nsu.bondar.Subject.SubjectType;
 
 /**
@@ -35,7 +34,7 @@ public class GradeBook {
      * File should contain student info in first 4 lines and subjects data after
      * header.
      *
-     * @param csvPath path to CSV file in resources folder (must be non-null, annotated with @NotNull)
+     * @param csvPath path to CSV file in resources (must be non-null, annotated with @NotNull)
      * @throws RuntimeException if file is not found or parsing fails
      */
     public void loadFromCsv(@NotNull String csvPath) throws IOException {
