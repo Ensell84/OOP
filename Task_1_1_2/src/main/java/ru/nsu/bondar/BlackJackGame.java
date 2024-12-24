@@ -86,15 +86,15 @@ public class BlackJackGame {
         dealer.getHand().addCard(deck.drawCard());
 
         System.out.println("Dealer dealt the cards");
-        System.out.println("Your cards: " +
-                player.getHand() + " => " + player.getHand().getTotalValue());
-        System.out.println("Dealer's cards: [" +
-                dealer.getHand().getCards().get(0) + ", <hidden card>]");
+        System.out.println("Your cards: "
+                + player.getHand() + " => " + player.getHand().getTotalValue());
+        System.out.println("Dealer's cards: ["
+                + dealer.getHand().getCards().get(0) + ", <hidden card>]");
 
         if (player.getHand().getTotalValue() == 21) {
             playerScore++;
-            System.out.println("You won the round! Score " +
-                    playerScore + ":" + dealerScore + " in your favor.");
+            System.out.println("You won the round! Score "
+                    + playerScore + ":" + dealerScore + " in your favor.");
             resetHands();
             return;
         }
@@ -106,12 +106,12 @@ public class BlackJackGame {
                 Card drawnCard = deck.drawCard();
                 player.getHand().addCard(drawnCard);
                 System.out.println("You drew " + drawnCard);
-                System.out.println("Your cards: " +
-                        player.getHand() + " => " + player.getHand().getTotalValue());
+                System.out.println("Your cards: "
+                        + player.getHand() + " => " + player.getHand().getTotalValue());
                 if (player.getHand().getTotalValue() > 21) {
                     dealerScore++;
-                    System.out.println("You lost the round! Score " +
-                            playerScore + ":" + dealerScore + " in favor of the dealer.");
+                    System.out.println("You lost the round! Score "
+                            + playerScore + ":" + dealerScore + " in favor of the dealer.");
                     resetHands();
                     return;
                 }
@@ -128,20 +128,20 @@ public class BlackJackGame {
             System.out.println("Dealer drew " + drawnCard);
         }
 
-        System.out.println("Your cards: " +
-                player.getHand() + " => " + player.getHand().getTotalValue());
-        System.out.println("Dealer's cards: " +
-                dealer.getHand() + " => " + dealer.getHand().getTotalValue());
+        System.out.println("Your cards: "
+                + player.getHand() + " => " + player.getHand().getTotalValue());
+        System.out.println("Dealer's cards: "
+                + dealer.getHand() + " => " + dealer.getHand().getTotalValue());
 
         if (dealer.getHand().getTotalValue() > 21 ||
                 player.getHand().getTotalValue() > dealer.getHand().getTotalValue()) {
             playerScore++;
-            System.out.println("You won the round! Score " +
-                    playerScore + ":" + dealerScore + " in your favor.");
+            System.out.println("You won the round! Score "
+                    + playerScore + ":" + dealerScore + " in your favor.");
         } else if (player.getHand().getTotalValue() < dealer.getHand().getTotalValue()) {
             dealerScore++;
-            System.out.println("You lost the round! Score " +
-                    playerScore + ":" + dealerScore + " in favor of the dealer.");
+            System.out.println("You lost the round! Score "
+                    + playerScore + ":" + dealerScore + " in favor of the dealer.");
         } else {
             System.out.println("It's a tie! Score " + playerScore + ":" + dealerScore + ".");
         }
