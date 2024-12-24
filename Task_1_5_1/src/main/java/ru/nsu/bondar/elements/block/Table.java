@@ -32,45 +32,25 @@ public class Table extends Element {
      */
     @Override
     public String toMarkdown() {
-        StringBuilder markdown = new StringBuilder();
-
+        List<String[]> allRows = new ArrayList<>();
         if (!rows.isEmpty()) {
-            String[] header = rows.get(0);
+            allRows.add(rows.get(0));
+            allRows.add(alignments);
+            allRows.addAll(rows.subList(1, rows.size()));
+        }
+
+        StringBuilder markdown = new StringBuilder();
+        for (String[] row : allRows) {
             markdown.append("| ");
-            for (int i = 0; i < header.length; i++) {
-                markdown.append(header[i]);
-                if (i < header.length - 1) {
+            for (int i = 0; i < row.length; i++) {
+                markdown.append(row[i]);
+                if (i < row.length - 1) {
                     markdown.append(" | ");
                 } else {
                     markdown.append(" |");
                 }
             }
             markdown.append("\n");
-
-            markdown.append("| ");
-            for (int i = 0; i < alignments.length; i++) {
-                markdown.append(alignments[i]);
-                if (i < alignments.length - 1) {
-                    markdown.append(" | ");
-                } else {
-                    markdown.append(" |");
-                }
-            }
-            markdown.append("\n");
-
-            for (int i = 1; i < rows.size(); i++) {
-                String[] row = rows.get(i);
-                markdown.append("| ");
-                for (int j = 0; j < row.length; j++) {
-                    markdown.append(row[j]);
-                    if (j < row.length - 1) {
-                        markdown.append(" | ");
-                    } else {
-                        markdown.append(" |");
-                    }
-                }
-                markdown.append("\n");
-            }
         }
 
         return markdown.toString().trim();
