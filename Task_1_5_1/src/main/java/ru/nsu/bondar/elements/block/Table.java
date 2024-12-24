@@ -36,28 +36,43 @@ public class Table extends Element {
         if (!rows.isEmpty()) {
             String[] header = rows.get(0);
             markdown.append("| ");
-            for (String cell : header) {
-                markdown.append(cell).append(" | ");
+            for (int i = 0; i < header.length; i++) {
+                markdown.append(header[i]);
+                if (i < header.length - 1) {
+                    markdown.append(" | ");
+                } else {
+                    markdown.append(" |");
+                }
             }
             markdown.append("\n");
 
             markdown.append("| ");
-            for (String alignment : alignments) {
-                markdown.append(alignment).append(" | ");
+            for (int i = 0; i < alignments.length; i++) {
+                markdown.append(alignments[i]);
+                if (i < alignments.length - 1) {
+                    markdown.append(" | ");
+                } else {
+                    markdown.append(" |");
+                }
             }
             markdown.append("\n");
 
             for (int i = 1; i < rows.size(); i++) {
                 String[] row = rows.get(i);
                 markdown.append("| ");
-                for (String cell : row) {
-                    markdown.append(cell).append(" | ");
+                for (int j = 0; j < row.length; j++) {
+                    markdown.append(row[j]);
+                    if (j < row.length - 1) {
+                        markdown.append(" | ");
+                    } else {
+                        markdown.append(" |");
+                    }
                 }
                 markdown.append("\n");
             }
         }
 
-        return markdown.toString();
+        return markdown.toString().trim();
     }
 
     /**
