@@ -1,6 +1,7 @@
 package ru.nsu.bondar.elements.block;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 import ru.nsu.bondar.elements.inline.Text;
@@ -50,5 +51,27 @@ class MarkdownListTest {
                 .build();
         String expectedMarkdown = "- [x] **Bold Text**";
         assertEquals(expectedMarkdown, list.toMarkdown());
+    }
+
+    @Test
+    void testEquals() {
+        MarkdownList list1 = new MarkdownList.MarkdownListBuilder()
+                .addItem("Item 1")
+                .addItem("Item 2")
+                .build();
+
+        MarkdownList list2 = new MarkdownList.MarkdownListBuilder()
+                .addItem("Item 1")
+                .addItem("Item 2")
+                .build();
+
+        MarkdownList list3 = new MarkdownList.MarkdownListBuilder()
+                .addItem("Item 1")
+                .addItem("Item 3")
+                .build();
+
+        assertEquals(list1, list2);
+        assertNotEquals(list1, list3);
+        assertNotEquals(list1, null);
     }
 }
