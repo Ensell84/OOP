@@ -1,8 +1,13 @@
 package ru.nsu.bondar;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+/**
+ * Tests for the Deck class.
+ */
 public class DeckTest {
     @Test
     public void testDeckCreation() {

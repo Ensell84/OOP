@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests for the BlackJackGame class.
+ */
 public class BlackJackGameTest {
     private Deck deck;
     private Player player;

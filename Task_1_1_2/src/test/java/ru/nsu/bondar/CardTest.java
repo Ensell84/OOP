@@ -1,8 +1,12 @@
 package ru.nsu.bondar;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * Tests for the Card class.
+ */
 public class CardTest {
     @Test
     public void testCardCreation() {
