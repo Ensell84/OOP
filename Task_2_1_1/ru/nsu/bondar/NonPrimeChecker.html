@@ -76,6 +76,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">NonPrimeChecker</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">A class that provides methods to check if a number is prime and to check if an array of numbers
+ contains a non-prime number.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -105,23 +107,35 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int[]</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#generateLargePrimeArray(int)" class="member-name-link">generateLargePrimeArray</a><wbr>(int&nbsp;size)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Generates an array of large prime numbers.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#hasNonPrimeParallelStream(int%5B%5D)" class="member-name-link">hasNonPrimeParallelStream</a><wbr>(int[]&nbsp;numbers)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Checks if an array of numbers contains a non-prime number using parallel streams.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#hasNonPrimeParallelThreads(int%5B%5D,int)" class="member-name-link">hasNonPrimeParallelThreads</a><wbr>(int[]&nbsp;numbers,
  int&nbsp;numThreads)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Checks if an array of numbers contains a non-prime number using multiple threads.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#hasNonPrimeSequential(int%5B%5D)" class="member-name-link">hasNonPrimeSequential</a><wbr>(int[]&nbsp;numbers)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Checks if an array of numbers contains a non-prime number sequentially.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isPrime(int)" class="member-name-link">isPrime</a><wbr>(int&nbsp;num)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Checks if a number is prime.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#main(java.lang.String%5B%5D)" class="member-name-link">main</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Main method to test the performance of the three methods.</div>
+</div>
 </div>
 </div>
 </div>
@@ -157,18 +171,39 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isPrime(int)">
 <h3>isPrime</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isPrime</span><wbr><span class="parameters">(int&nbsp;num)</span></div>
+<div class="block">Checks if a number is prime.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>num</code> - the number to check</dd>
+<dt>Returns:</dt>
+<dd>true if the number is prime, false otherwise</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="generateLargePrimeArray(int)">
 <h3>generateLargePrimeArray</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name">generateLargePrimeArray</span><wbr><span class="parameters">(int&nbsp;size)</span></div>
+<div class="block">Generates an array of large prime numbers.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>size</code> - the size of the array</dd>
+<dt>Returns:</dt>
+<dd>the array of prime numbers</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="hasNonPrimeSequential(int[])">
 <h3>hasNonPrimeSequential</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasNonPrimeSequential</span><wbr><span class="parameters">(int[]&nbsp;numbers)</span></div>
+<div class="block">Checks if an array of numbers contains a non-prime number sequentially.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>numbers</code> - the array of numbers to check</dd>
+<dt>Returns:</dt>
+<dd>true if the array contains a non-prime number, false otherwise</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -177,7 +212,13 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasNonPrimeParallelThreads</span><wbr><span class="parameters">(int[]&nbsp;numbers,
  int&nbsp;numThreads)</span>
                                           throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
+<div class="block">Checks if an array of numbers contains a non-prime number using multiple threads.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>numbers</code> - the array of numbers to check</dd>
+<dd><code>numThreads</code> - the number of threads to use</dd>
+<dt>Returns:</dt>
+<dd>true if the array contains a non-prime number, false otherwise</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
 </dl>
@@ -187,6 +228,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="hasNonPrimeParallelStream(int[])">
 <h3>hasNonPrimeParallelStream</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasNonPrimeParallelStream</span><wbr><span class="parameters">(int[]&nbsp;numbers)</span></div>
+<div class="block">Checks if an array of numbers contains a non-prime number using parallel streams.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>numbers</code> - the array of numbers to check</dd>
+<dt>Returns:</dt>
+<dd>true if the array contains a non-prime number, false otherwise</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -194,6 +242,7 @@ loadScripts(document, 'script');</script>
 <h3>main</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">main</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</span>
                  throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
+<div class="block">Main method to test the performance of the three methods.</div>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
