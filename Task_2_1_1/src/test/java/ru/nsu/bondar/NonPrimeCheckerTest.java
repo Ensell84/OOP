@@ -7,9 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
 import org.junit.jupiter.api.Test;
 
+/**
+ * Class with tests for NonPrimeChecker class methods.
+ */
 public class NonPrimeCheckerTest {
 
     @Test

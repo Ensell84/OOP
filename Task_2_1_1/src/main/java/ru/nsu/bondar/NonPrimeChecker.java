@@ -10,6 +10,7 @@ import java.util.Random;
 public class NonPrimeChecker {
     /**
      * Checks if a number is prime.
+     *
      * @param num the number to check
      * @return true if the number is prime, false otherwise
      */
@@ -27,6 +28,7 @@ public class NonPrimeChecker {
 
     /**
      * Generates an array of large prime numbers.
+     *
      * @param size the size of the array
      * @return the array of prime numbers
      */
@@ -54,6 +56,7 @@ public class NonPrimeChecker {
 
     /**
      * Checks if an array of numbers contains a non-prime number sequentially.
+     *
      * @param numbers the array of numbers to check
      * @return true if the array contains a non-prime number, false otherwise 
      */
@@ -68,6 +71,7 @@ public class NonPrimeChecker {
 
     /**
      * Checks if an array of numbers contains a non-prime number using multiple threads.
+     *
      * @param numbers the array of numbers to check
      * @param numThreads the number of threads to use
      * @return true if the array contains a non-prime number, false otherwise
@@ -121,6 +125,7 @@ public class NonPrimeChecker {
 
     /**
      * Checks if an array of numbers contains a non-prime number using parallel streams.
+     *
      * @param numbers the array of numbers to check
      * @return true if the array contains a non-prime number, false otherwise
      */
@@ -146,8 +151,8 @@ public class NonPrimeChecker {
         long endTimeSeq = System.nanoTime();
 
         long durationSeq = (endTimeSeq - startTimeSeq) / 1_000_000;
-        System.out.println("Sequential execution: non-prime? " +
-                hasNonPrimeSeq + ", Time: " + durationSeq + " ms");
+        System.out.println("Sequential execution: non-prime? "
+                + hasNonPrimeSeq + ", Time: " + durationSeq + " ms");
 
         // Threads
         System.out.println("\nParallel execution with Threads:");
@@ -159,8 +164,8 @@ public class NonPrimeChecker {
             long endTimeThread = System.nanoTime();
 
             long durationThread = (endTimeThread - startTimeThread) / 1_000_000;
-            System.out.println("Threads = " + numThreads + ": non-prime? " +
-                    hasNonPrimeThread + ", Time: " + durationThread + " ms");
+            System.out.println("Threads = " + numThreads + ": non-prime? "
+                    + hasNonPrimeThread + ", Time: " + durationThread + " ms");
         }
 
         // ParallelStream
@@ -171,7 +176,7 @@ public class NonPrimeChecker {
         long endTimeStream = System.nanoTime();
 
         long durationStream = (endTimeStream - startTimeStream) / 1_000_000;
-        System.out.println("\nParallel Stream execution: non-prime? " +
-                hasNonPrimeStream + ", Time: " + durationStream + " ms");
+        System.out.println("\nParallel Stream execution: non-prime? "
+                + hasNonPrimeStream + ", Time: " + durationStream + " ms");
     }
 }
