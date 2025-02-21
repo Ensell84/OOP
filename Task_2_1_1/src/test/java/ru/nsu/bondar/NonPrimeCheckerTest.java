@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.jupiter.api.Test;
 
 public class NonPrimeCheckerTest {
@@ -74,5 +77,21 @@ public class NonPrimeCheckerTest {
     public void testHasNonPrimeParallelStream_WithNonPrime() {
         int[] numbers = {2, 3, 4, 5, 7};
         assertTrue(NonPrimeChecker.hasNonPrimeParallelStream(numbers));
+    }
+
+    @Test
+    public void testMainOutput() throws Exception {
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        try {
+            NonPrimeChecker.main(new String[0]);
+
+            String output = outContent.toString();
+            assertTrue(output.contains("Array size:"));
+        } finally {
+            System.setOut(originalOut);
+        }
     }
 }
