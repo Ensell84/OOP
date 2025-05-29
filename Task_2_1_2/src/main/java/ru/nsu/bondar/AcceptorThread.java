@@ -1,31 +1,50 @@
 package ru.nsu.bondar;
 
 import java.io.IOException;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
+import java.nio.channels.*;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class AcceptorThread implements Runnable {
     private final ServerSocketChannel serverChannel;
-    private final WorkerRegistry workerRegistry;
-    private final ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();
+    private final CoordinationState state;
+    private final ExecutorService executor;
 
-    public AcceptorThread(ServerSocketChannel serverChannel, WorkerRegistry workerRegistry) {
+    public AcceptorThread(ServerSocketChannel serverChannel, CoordinationState state, ExecutorService executor) {
         this.serverChannel = serverChannel;
-        this.workerRegistry = workerRegistry;
+        this.state = state;
+        this.executor = executor;
     }
 
     @Override
     public void run() {
         try {
-            while (true) {
-                SocketChannel workerChannel = serverChannel.accept();
-                Worker worker = new Worker(workerChannel);
+            while (!Thread.interrupted()) {
+                try {
+                    SocketChannel workerChannel = serverChannel.accept();
+                    workerChannel.configureBlocking(true);
 
-                workerRegistry.register(worker);
-                executor.execute(new WorkerHandler(worker, workerRegistry));
+                    Worker worker = new Worker(workerChannel);
+                    state.registerWorker(worker);
+
+                    executor.execute(new WorkerHandler(worker, state));
+
+                } catch (ClosedChannelException e) {
+                    break;
+                } catch (IOException e) {
+                    if (!serverChannel.isOpen()) break;
+                    e.printStackTrace();
+                }
             }
-        } catch (IOException e) {/* ignore */}
+        } finally {
+            closeServer();
+        }
+    }
+
+    private void closeServer() {
+        try {
+            if (serverChannel.isOpen()) {
+                serverChannel.close();
+            }
+        } catch (IOException ignored) {}
     }
 }
