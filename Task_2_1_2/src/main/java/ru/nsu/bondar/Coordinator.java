@@ -1,8 +1,11 @@
 package ru.nsu.bondar;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.nio.channels.ServerSocketChannel;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -18,15 +21,19 @@ public class Coordinator {
     private final AtomicInteger pendingTasks = new AtomicInteger(0);
 
     public void start(int port) throws IOException {
-
+        serverSocket = ServerSocketChannel.open();
+        serverSocket.bind(new InetSocketAddress(port));
+        executor = Executors.newVirtualThreadPerTaskExecutor();
+        executor.execute(new AcceptorThread(serverSocket, workerRegistry));
     }
 
     public void stop() throws IOException {
-
+        executor.shutdownNow();
+        serverSocket.close();
+        workerRegistry.closeAll();
     }
 
     public boolean checkPrime(long[] array) throws InterruptedException {
-
     }
 
     public void nonPrimeFound() {
