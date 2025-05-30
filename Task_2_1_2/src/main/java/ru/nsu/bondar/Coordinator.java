@@ -12,15 +12,18 @@ public class Coordinator {
     private ExecutorService executor;
 
     public void start(int port) throws IOException {
+        System.out.println("[Coordinator] Starting on port " + port);
         serverSocket = ServerSocketChannel.open();
         serverSocket.bind(new InetSocketAddress(port));
 
         executor = Executors.newVirtualThreadPerTaskExecutor();
         executor.execute(new AcceptorThread(serverSocket, state, executor));
+        System.out.println("[Coordinator] Acceptor thread started");
     }
 
     public boolean checkPrime(long[] array) {
         List<Task> tasks = splitArray(array, 1000);
+        System.out.println("[Coordinator] Starting job with " + tasks.size() + " tasks");
         state.startJob(tasks);
 
         while (!state.isJobComplete()) {
@@ -37,6 +40,7 @@ public class Coordinator {
     }
 
     public void stop() throws IOException {
+        System.out.println("[Coordinator] Stopping...");
         executor.shutdownNow();
 
         if (serverSocket != null && serverSocket.isOpen()) {

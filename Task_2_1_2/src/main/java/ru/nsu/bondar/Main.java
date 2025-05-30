@@ -8,8 +8,8 @@ public class Main {
         long[] numbers = {2, 3, 4, 5, 6, 7, 8, 9, 10};
 
         System.out.println("Starting");
-        boolean allPrime = coordinator.checkPrime(numbers);
-        System.out.println("All prime? " + allPrime);
+        //boolean allPrime = coordinator.checkPrime(numbers);
+        //System.out.println("All prime? " + allPrime);
 
         coordinator.stop();
     }

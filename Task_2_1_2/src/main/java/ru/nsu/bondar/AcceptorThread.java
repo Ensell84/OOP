@@ -22,6 +22,7 @@ public class AcceptorThread implements Runnable {
                 try {
                     SocketChannel workerChannel = serverChannel.accept();
                     workerChannel.configureBlocking(true);
+                    System.out.println("[AcceptorThread] Worker connected: " + workerChannel.getRemoteAddress());
 
                     Worker worker = new Worker(workerChannel);
                     state.registerWorker(worker);
@@ -32,10 +33,11 @@ public class AcceptorThread implements Runnable {
                     break;
                 } catch (IOException e) {
                     if (!serverChannel.isOpen()) break;
-                    e.printStackTrace();
+                    System.err.println("[AcceptorThread] IO error: " + e.getMessage());
                 }
             }
         } finally {
+            System.out.println("[AcceptorThread] Shutting down");
             closeServer();
         }
     }
