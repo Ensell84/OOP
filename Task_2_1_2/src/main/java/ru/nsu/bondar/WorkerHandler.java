@@ -35,6 +35,8 @@ public class WorkerHandler implements Runnable {
                 if (worker.currentTask == null) {
                     assignTask();
                 }
+
+                processInput();
             }
         } catch (Exception e) {
             System.err.println("[WorkerHandler] Error: " + e.getMessage());
