@@ -35,12 +35,7 @@ public class WorkerHandler implements Runnable {
                 if (worker.currentTask == null) {
                     assignTask();
                 }
-
-                processInput();
-                Thread.sleep(50); // ??
             }
-        } catch (InterruptedException e) {
-            // normal shutdown
         } catch (Exception e) {
             System.err.println("[WorkerHandler] Error: " + e.getMessage());
         } finally {
