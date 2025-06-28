@@ -44,23 +44,11 @@ public class TaskOrchestrator {
 
             for (Student student : group.getStudents()) {
                 for (Task task : config.getTasks()) {
-                    System.out.println(
-                            "\n┌─────────────────────────────────────────────────────────┐"
-                    );
-                    System.out.println(
-                            " STUDENT: " +
-                                    student.getGithubNickname() +
-                                    "  TASK: " +
-                                    task.getId()
-                    );
-                    System.out.println(
-                            "└─────────────────────────────────────────────────────────┘"
-                    );
+                    System.out.println("\n┌─────────────────────────────────────────────────────────┐");
+                    System.out.println(" STUDENT: " + student.getGithubNickname() + "  TASK: " + task.getId());
+                    System.out.println("└─────────────────────────────────────────────────────────┘");
 
-                    StudentTaskResult result = processStudentTask(
-                            student,
-                            task
-                    );
+                    StudentTaskResult result = processStudentTask(student, task);
                     results.add(result);
                 }
             }
@@ -71,5 +59,120 @@ public class TaskOrchestrator {
         System.out.println("   Total results: " + results.size());
         System.out.println("=".repeat(60));
         return results;
+    }
+
+    /**
+     * Processes a single task for a single student.
+     *
+     * @param student the student
+     * @param task    the task to check
+     * @return the result of checking this task for this student
+     */
+    private StudentTaskResult processStudentTask(Student student, Task task) {
+        StudentTaskResult result = new StudentTaskResult(student, task);
+
+        try {
+            String repoPath = cloneStudentRepository(student);
+            if (repoPath == null) return result;
+            if (!buildStudentProject(result, repoPath, task)) return result;
+
+            generateProjectDocumentation(result, repoPath, task);
+            checkProjectCodeStyle(result, repoPath, task);
+            runProjectTests(result, repoPath, task);
+            calculateFinalScore(result, task);
+        } catch (Exception e) {
+            System.out.println("ERROR");
+            System.out.println("  RESULT: Processing failed - " + e.getMessage());
+        }
+
+        return result;
+    }
+
+    private String cloneStudentRepository(Student student) {
+        System.out.print("  [1/5] Repository....... ");
+
+        String repoPath = gitService.cloneOrUpdateRepository(
+                student.getRepositoryUrl(),
+                student.getGithubNickname()
+        );
+
+        if (repoPath == null) {
+            System.out.println("FAILED");
+            System.out.println("  RESULT: Repository clone failed - skipping remaining steps");
+            return null;
+        }
+        return repoPath;
+    }
+
+    private boolean buildStudentProject(StudentTaskResult result, String repoPath, Task task) {
+        System.out.print("  [2/5] Build............ ");
+
+        boolean buildSuccess = buildService.buildProject(repoPath, task.getId());
+        result.setBuildSuccess(buildSuccess);
+
+        if (!buildSuccess) {
+            System.out.println("FAILED");
+            System.out.println("  RESULT: Build failed - skipping remaining steps");
+            return false;
+        }
+        return true;
+    }
+
+    private void generateProjectDocumentation(StudentTaskResult result, String repoPath, Task task) {
+        System.out.print("  [3/5] Documentation.... ");
+
+        boolean docsSuccess = buildService.generateDocumentation(repoPath, task.getId());
+        result.setDocsSuccess(docsSuccess);
+
+        if (!docsSuccess) System.out.println("FAILED");
+    }
+
+    private void checkProjectCodeStyle(StudentTaskResult result, String repoPath, Task task) {
+        System.out.print("  [4/5] Style check...... ");
+
+        boolean styleSuccess = buildService.checkCodeStyle(repoPath, task.getId());
+        result.setStyleSuccess(styleSuccess);
+
+        if (!styleSuccess) System.out.println("FAILED");
+    }
+
+    private void runProjectTests(StudentTaskResult result, String repoPath, Task task) {
+        System.out.print("  [5/5] Tests............ ");
+
+        BuildService.TestResults testResults = buildService.runTests(repoPath, task.getId());
+        result.setPassedTests(testResults.getPassed());
+        result.setFailedTests(testResults.getFailed());
+        result.setSkippedTests(testResults.getSkipped());
+
+        int totalTests = testResults.getPassed() + testResults.getFailed();
+        System.out.println("OK (" + testResults.getPassed() + "/" + totalTests + " passed)");
+    }
+
+    private void calculateFinalScore(StudentTaskResult result, Task task) {
+        if (!result.isBuildSuccess()) {
+            result.setScore(0);
+            System.out.println("  FINAL SCORE: 0/" + task.getMaxScore() + " points");
+            return;
+        }
+
+        int maxScore = task.getMaxScore();
+        double totalScore = 0;
+
+        totalScore += maxScore * BUILD_SCORE_RATIO;
+
+        if (result.isDocsSuccess()) totalScore += maxScore * DOCS_SCORE_RATIO;
+        if (result.isStyleSuccess()) totalScore += maxScore * STYLE_SCORE_RATIO;
+
+        int totalTests = result.getPassedTests() + result.getFailedTests();
+        if (totalTests > 0) {
+            double testRatio = (double) result.getPassedTests() / totalTests;
+            totalScore += maxScore * TESTS_SCORE_RATIO * testRatio;
+        }
+
+        totalScore += result.getAdditionalPoints();
+        int score = Math.min((int) Math.round(totalScore), maxScore);
+        result.setScore(score);
+
+        System.out.println("  FINAL SCORE: " + score + "/" + task.getMaxScore() + " points");
     }
 }
