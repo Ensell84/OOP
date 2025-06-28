@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'groovy'
     id 'jacoco'
+    id 'application'
+    id 'distribution'
 }
 
 group = 'ru.nsu.bondar'
@@ -12,12 +14,41 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.codehaus.groovy:groovy-all:3.0.25'
+    implementation 'org.apache.groovy:groovy-all:4.0.24'
     //implementation 'org.eclipse.jgit:org.eclipse.jgit:6.7.0.202309050840-r'
     //implementation 'org.jsoup:jsoup:1.17.2'
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['src/main/java']
+        }
+        java {
+            srcDirs = []
+        }
+    }
+}
+
+application {
+    mainClass = 'ru.nsu.bondar.Main'
+    applicationName = 'oop-checker'
+}
+
+distributions {
+    main {
+        distributionBaseName = 'oop-checker'
+        contents {
+            into('bin') {
+                filePermissions {
+                    unix(0755)
+                }
+            }
+        }
+    }
 }
 
 test {
