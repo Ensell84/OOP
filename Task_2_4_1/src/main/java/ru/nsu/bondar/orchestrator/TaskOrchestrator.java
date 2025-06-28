@@ -15,7 +15,6 @@ public class TaskOrchestrator {
 
     private final GitService gitService;
     private final BuildService buildService;
-    private final CheckingService checkingService;
 
     private static final double BUILD_SCORE_RATIO = 0.30;
     private static final double DOCS_SCORE_RATIO = 0.10;
@@ -25,7 +24,6 @@ public class TaskOrchestrator {
     public TaskOrchestrator() {
         this.gitService = new GitService();
         this.buildService = new BuildService();
-        this.checkingService = new CheckingService();
     }
 
     /**
