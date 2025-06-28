@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.bondar"},{"l":"ru.nsu.bondar.model"}];updateSearchResults();

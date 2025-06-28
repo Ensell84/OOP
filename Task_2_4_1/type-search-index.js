@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.bondar.model","l":"Checkpoint"},{"p":"ru.nsu.bondar.model","l":"Group"},{"p":"ru.nsu.bondar","l":"Main"},{"p":"ru.nsu.bondar.model","l":"Student"},{"p":"ru.nsu.bondar.model","l":"StudentTaskResult"},{"p":"ru.nsu.bondar.model","l":"Task"}];updateSearchResults();
