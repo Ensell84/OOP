@@ -31,6 +31,14 @@ sourceSets {
             srcDirs = []
         }
     }
+    test {
+        groovy {
+            srcDirs = ['src/test/java']
+        }
+        java {
+            srcDirs = []
+        }
+    }
 }
 
 application {
